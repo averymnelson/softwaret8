@@ -1,6 +1,5 @@
 import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+//import java.util.Timer;
 
 class HelloWorldApp {
   public static void main(String[] args) {
@@ -9,14 +8,15 @@ class HelloWorldApp {
   }
 }
    
-class ShowPicture {
+class ShowPicture extends JFrame{
  public static void main(String args[]) {
+  //Timer timer = new Timer();
   var frame = new JFrame();
-  var icon = new ImageIcon("logo.jpg");
-  var label = new JLabel(icon);
-  frame.add(label);
+  View view = new View();
+  frame.setSize(1000, 636);
+  frame.setFocusable(true);
+  frame.getContentPane().add(view);
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  frame.pack();
   frame.setVisible(true);
  }
 }
