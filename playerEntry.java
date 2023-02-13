@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 //import javax.swing.JTextArea;
 //import javax.swing.JTextField;
 import javax.swing.JTable;
-
+// gracie
 //Class playerEntry : Creates tables and allows user to enter text
 public class playerEntry extends JFrame implements ActionListener{
     //Instance variables/constants
