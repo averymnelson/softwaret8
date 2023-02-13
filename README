@@ -5,3 +5,6 @@ Gracie Tillinghast
 Avery Nelson
 Marlise Massey 
 Claire Dildy -adding player entry
+
+LazerTag.java : This is like our "Game.java"
+playerEntry.java : This is where players enter their ID/codename into a 10x4 table
