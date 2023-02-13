@@ -1,18 +1,18 @@
-import java.awt.LayoutManager;
+//import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import java.awt.event.MouseEvent;
 //import javax.swing.GroupLayout;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 //import javax.swing.JScrollPane;
 //import javax.swing.JTable;
 //import javax.swing.JTextArea;
 //import javax.swing.JTextField;
 import javax.swing.JTable;
-
+//Claire Dildy
 //Class playerEntry : Creates tables and allows user to enter text
 public class playerEntry extends JFrame implements ActionListener{
     //Instance variables/constants
@@ -55,7 +55,7 @@ public class playerEntry extends JFrame implements ActionListener{
         //Add contents to the window.
         //frame.add(new playerEntry());
         //Display the window.
-        frame.pack();
+        //frame.pack();
         frame.setVisible(true);
     }
     
