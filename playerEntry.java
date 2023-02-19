@@ -5,16 +5,16 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 //import java.awt.event.MouseEvent;
 //import javax.swing.GroupLayout;
-import java.awt.GridLayout;
+//import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.security.auth.kerberos.KerberosCredMessage;
+//import javax.security.auth.kerberos.KerberosCredMessage;
 //import javax.swing.JPanel;
-import javax.swing.*;
+//import javax.swing.*;
 import javax.swing.JScrollPane;
 //import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+//import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 
 // claire, gracie
@@ -26,7 +26,7 @@ import javax.swing.JTable;
     //Instance variables/constants
     protected JTextField textField;
     protected JTextArea textArea;
-    private final static String newline = "\n";
+    //private final static String newline = "\n";
     public static int ID;
     public static String fName, lName, codeName; 
     
@@ -66,7 +66,7 @@ import javax.swing.JTable;
 
         JFrame frame = new JFrame("EntryScreenDemo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel panel = new JPanel();
+        //JPanel panel = new JPanel();
         //panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Team 1"));
         // frame.setSize(600, 600);
         // frame.setVisible(true);
@@ -113,7 +113,7 @@ import javax.swing.JTable;
     // Main
     public static void main(String[] args){
         System.out.println("Hello");
-        playerEntry entryScreen = new playerEntry();
+        //playerEntry entryScreen = new playerEntry();
         createGUI();
         //createAndShowGUI();
         //run();
