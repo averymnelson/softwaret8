@@ -5,9 +5,9 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 //import java.awt.event.MouseEvent;
 //import javax.swing.GroupLayout;
-import java.awt.GridLayout;
+//import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.security.auth.kerberos.KerberosCredMessage;
+//import javax.security.auth.kerberos.KerberosCredMessage;
 //import javax.swing.JPanel;
 import javax.swing.*;
 import javax.swing.JScrollPane;
@@ -20,13 +20,12 @@ import javax.swing.JTable;
 // claire, gracie
 
 //Class playerEntry : Creates tables and allows user to enter text
-// public class playerEntry extends JFrame implements ActionListener{
-    public class playerEntry extends JFrame implements ActionListener {
+public class playerEntry extends JFrame implements ActionListener {
 
     //Instance variables/constants
     protected JTextField textField;
     protected JTextArea textArea;
-    private final static String newline = "\n";
+    //private final static String newline = "\n";
     public static int ID;
     public static String fName, lName, codeName; 
     
@@ -60,13 +59,14 @@ import javax.swing.JTable;
         // textArea.setEditable(true);
     }
     //Create a table for player entry
-    public static void createGUI () {
+    public void createGUI () {
 
         //JTable table = new JTable(10, 2);
-
-        JFrame frame = new JFrame("EntryScreenDemo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
+        JFrame frame = new JFrame("Entry Terminal");
+
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Team 1"));
         // frame.setSize(600, 600);
         // frame.setVisible(true);
@@ -83,13 +83,20 @@ import javax.swing.JTable;
         // textField.addActionListener(this);
         // textArea = new JTextArea(4, 10);
         JScrollPane scrollPane = new JScrollPane(table);
-        frame.add(scrollPane, BorderLayout.CENTER);
-        frame.setSize(600, 600);
+        
+        panel.add(scrollPane, BorderLayout.CENTER);
+        frame.add(panel);
+        frame.setSize(1000, 636);
         frame.setVisible(true);
         //table.setBounds(30,40,200,300);
         // table.setShowGrid(true);
         //add(scrollPane);
-        table.setGridColor(Color.pink);
+        table.setGridColor(Color.gray);
+        table.setBackground(Color.pink);
+        table.setRowSelectionAllowed(false);
+        table.setSelectionBackground(Color.pink);
+        table.setSelectionForeground(Color.pink);
+        
     }
 
     // }
@@ -109,13 +116,4 @@ import javax.swing.JTable;
     // private static void run() {
     //     createAndShowGUI();
     // }
-
-    // Main
-    public static void main(String[] args){
-        System.out.println("Hello");
-        playerEntry entryScreen = new playerEntry();
-        createGUI();
-        //createAndShowGUI();
-        //run();
-    }
 }

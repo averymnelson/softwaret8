@@ -16,6 +16,8 @@ public class LazerTag{
     new Timer(3_000, (e) -> { frame.setVisible(false); frame.dispose(); }).start();
   }
   public static void main(String[] args) {
+    playerEntry entryScreen = new playerEntry();
+    entryScreen.createGUI();
     ShowPicture();
   }
 }
