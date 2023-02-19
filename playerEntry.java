@@ -67,7 +67,8 @@ public class playerEntry extends JFrame implements ActionListener {
 
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Team 1"));
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Team 1"));
         // frame.setSize(600, 600);
         // frame.setVisible(true);
         //JScrollPane scrollPane = new JScrollPane(table);
@@ -116,4 +117,13 @@ public class playerEntry extends JFrame implements ActionListener {
     // private static void run() {
     //     createAndShowGUI();
     // }
+
+    // Main
+    public static void main(String[] args){
+        System.out.println("Hello");
+        playerEntry entryScreen = new playerEntry();
+        createGUI();
+        //createAndShowGUI();
+        //run();
+    }
 }
