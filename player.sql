@@ -1,4 +1,3 @@
-
 --Create table
 CREATE TABLE player (
   id INT,
@@ -11,3 +10,5 @@ CREATE TABLE player (
 INSERT INTO player (id, first_name, last_name, codename)
 VALUES (1, 'Jim', 'Strother', 'Opus');
 
+INSERT INTO player (id, first_name, last_name, codename)
+VALUES (2, 'Tim', 'Strothing', 'Magnum');
