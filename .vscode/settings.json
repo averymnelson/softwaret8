@@ -1,4 +1,9 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
+    "scripts": 
+    {
+        "start": "node index.js"
+    }
+
+    ,"java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "interactive"
 }
