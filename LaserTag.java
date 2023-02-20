@@ -3,7 +3,7 @@ import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class LazerTag{
+public class LaserTag{
   public static void ShowPicture(){
     var frame = new JFrame();
     var icon = new ImageIcon("logo.jpg");
@@ -16,6 +16,8 @@ public class LazerTag{
     new Timer(3_000, (e) -> { frame.setVisible(false); frame.dispose(); }).start();
   }
   public static void main(String[] args) {
+    playerEntry entryScreen = new playerEntry();
+    entryScreen.createGUI();
     ShowPicture();
   }
 }
