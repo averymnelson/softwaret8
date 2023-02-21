@@ -1,10 +1,10 @@
+package test;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
-// claire, gracie
 
 //Class playerEntry : Creates tables and allows user to enter text
 public class playerEntry extends JFrame implements ActionListener {
