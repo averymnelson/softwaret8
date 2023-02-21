@@ -1,10 +1,10 @@
 This is the code for Team 8's Software Engineering (CSCE 3513) Project 
 Authors:
-Laine Rainbolt - adding 3 sec Logo
+Laine Rainbolt 
 Gracie Tillinghastt
 Avery Nelson
 Marlise Massey 
-Claire Dildy -adding player entry
+Claire Dildy 
 
 LazerTag.java : This is like our "Game.java"
-playerEntry.java : This is where players enter their ID/codename into a 10x4 table
+playerEntry.java : This is where players enter their ID/codename into a table
