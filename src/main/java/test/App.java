@@ -25,6 +25,11 @@ public final class App {
         try (Connection conn = DriverManager.getConnection(url)){
             if (conn != null) {
                 System.out.println("Connected to the database!");
+                String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (10, 'testfName', 'testlName', 'Dope')";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.executeUpdate();
+                pstmt.close();
+                conn.close();
             }
             else {
                 System.out.println("Failed to make connection!");

@@ -1,8 +1,7 @@
 package test;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -12,6 +11,8 @@ public class playerEntry extends JFrame implements ActionListener {
     //Instance variables/constants
     public static int ID;
     public static String fName, lName, codeName; 
+    public String team1Players[][] = new String[15][2];
+    public String team2Players[][] = new String[15][2];
     
     //Constructor
     public playerEntry(){}
@@ -40,8 +41,6 @@ public class playerEntry extends JFrame implements ActionListener {
     	subPanel2.setBorder(BorderFactory.createTitledBorder("Team 2"));
     	subPanel2.setLayout(new GridLayout(1,1));
 
-        String team1Players[][] = new String[15][2];
-        String team2Players[][] = new String[15][2];
         String [] columnName = {"ID", "Codename"};
         JTable table1 = new JTable(team1Players,columnName);
         JTable table2 = new JTable(team2Players,columnName);
@@ -56,7 +55,7 @@ public class playerEntry extends JFrame implements ActionListener {
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 1;
-        
+
         //Adding JPanel 1 and 2 to main JPanel
         subPanel1.add(scrollPane1);
         subPanel2.add(scrollPane2);
@@ -66,6 +65,7 @@ public class playerEntry extends JFrame implements ActionListener {
         frame.add(mainPanel);
         frame.setSize(1000, 636);
         mainPanel.add(bStart, c);
+        addKeyBind(mainPanel, "F5");
         frame.setVisible(true);
         
         table1.setRowHeight(26);
@@ -78,11 +78,28 @@ public class playerEntry extends JFrame implements ActionListener {
         table2.setBackground(Color.pink);
         table2.setRowSelectionAllowed(false);
     }
+
+    private void addKeyBind(JComponent contentPane, String key) {
+        InputMap inputMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = contentPane.getActionMap();
+        inputMap.put(KeyStroke.getKeyStroke(key), "Start Game");
+        actionMap.put("Start Game", startGame);
+    }
+
+    Action startGame = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          System.out.println("F5 pressed");
+          playActionDisplay display = new playActionDisplay();
+          display.createGUI();
+        }
+      };
     
     //Override ActionListener methods
     // @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Game Started");
+        //System.out.println(team1Players[0][0] + " " + team1Players[0][1]);
         // String text = textField.getText();
         // textArea.append(text + newline);
         // //Sets the position of the text insertion
