@@ -3,8 +3,10 @@ package test;
 import javax.swing.*;
 
 public class playActionDisplay {
-    public playActionDisplay(){}
-    public void createGUI(){
+    public playActionDisplay() {
+    }
+
+    public void createGUI() {
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
         frame.add(panel);

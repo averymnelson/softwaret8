@@ -3,103 +3,69 @@ package test;
 //imports
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener; //using action listener b/c I believe this is how we can stop play
-//import javax.swing.ImageIcon;
-//import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-//import java.util.TimerTask;
-//import java.util.Timer; causing error, wrong import
 import javax.swing.Timer;
 import java.awt.Font;
-//import java.text.DecimalFormat; //add decimal formatting later to keep 00:00 
 
-public class timerTest{
-    //Create a window to display the timer count down -> can be moved later into project
-    //Instance variables
-    //private Timer countdownTimer; 
-    //TimerTask playAction;
+public class timerTest {
+    // Create a window to display the timer count down -> can be moved later
+    // Instance variables
     int seconds, minutes;
     private JLabel label;
-    
-    //Constructor
-    public timerTest(){
+
+    // Constructor
+    public timerTest() {
         JFrame frame = new JFrame();
-        frame.setSize(600,600);
+        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        label = new JLabel("Game label"); //possible to change the font 
-        
-        //For adding an icon which can be behind the count down
-        //ImageIcon icon = new ImageIcon("timer.png");
-        //Image img = icon.getImage();
-        //resize the image to be smaller
-        //Image newImg = img.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
-        //icon = new ImageIcon(newImg);
-        //label.setIcon(new ImageIcon("timer.png")); DONT UN-COMMENT 
-        //label.setIcon(icon);
-        //label.setText("Counting down"); //Can try to put the label on top of the icon image if we want
-       
-        label.setSize(400, 400); //possibly use set bounds to be more specific about size
-        //Changing fonts & text size 
+        label = new JLabel("Game label"); // possible to change the font
+
+        // For adding an icon which can be behind the count down
+        // ImageIcon icon = new ImageIcon("timer.png");
+        // Image img = icon.getImage();
+        // resize the image to be smaller
+        // Image newImg = img.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
+        // icon = new ImageIcon(newImg);
+        // label.setIcon(new ImageIcon("timer.png")); DONT UN-COMMENT
+        // label.setIcon(icon);
+        // label.setText("Counting down"); //Can try to put the label on top of the icon
+        // image if we want
+
+        label.setSize(400, 400); // possibly use set bounds to be more specific about size
+        // Changing fonts & text size
         label.setFont(new Font("Arial", Font.BOLD, 30));
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setText("0:30");
 
         frame.add(label);
         frame.setVisible(true);
-        
-        //Adjust for time requirements later
+
+        // Adjust for time requirements later
         minutes = 1;
         seconds = 0;
     }
 
-    public void countdownTest(){
-        //System.out.println("Testing Timer"); //Testing out multiple ways to structure the Timer code
-        //Counts at 1 second rate = 1000 miliseconds
+    public void countdownTest() {
         int delay = 1000;
-        //----------------------------------------------
-        //Avoiding casting to stop the timer
-        //----------------------------------------------
         Timer t = new Timer(delay, null);
         t.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt){
+            public void actionPerformed(ActionEvent evt) {
                 seconds--;
                 label.setText(minutes + ":" + seconds);
-                //Decreasing the minute when seconds fall below 0, still want to display 0
-                if(seconds == -1){
+                // Decreasing the minute when seconds fall below 0, still want to display 0
+                if (seconds == -1) {
                     seconds = 30;
                     minutes--;
                     label.setText(minutes + ":" + seconds);
                 }
-                //Stop the timer, stop the play action
-                if(minutes == 0 && seconds == 0){
+                // Stop the timer, stop the play action
+                if (minutes == 0 && seconds == 0) {
                     t.stop();
                     return;
                 }
             }
         });
         t.start();
-        
-        //-----------------------------------------------
-        //This is the way the java docs sets up a Timer, uses casting to stop timer
-        //-----------------------------------------------
-        // ActionListener countdownTimer = new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         seconds--;
-        //         //Decreasing the minute when seconds fall below 0, still want to display 0
-        //         if(seconds == -1){
-        //             seconds = 59;
-        //             minutes--;
-        //         }
-        //         //Stop the timer, stop the play action
-        //         if(minutes == 0 && seconds == 0){
-            
-        //         }
-        //         //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-        //     }
-        // };
-        //new Timer(delay, countdownTimer).start();
-        //((Timer) countdownTimer).stop();
     }
 }
-
