@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.Timer;
 
 //Class playerEntry : Creates tables and allows user to enter text
 public class playerEntry extends JFrame implements ActionListener {
@@ -47,7 +48,7 @@ public class playerEntry extends JFrame implements ActionListener {
         JScrollPane scrollPane1 = new JScrollPane(table1);
         JScrollPane scrollPane2 = new JScrollPane(table2);
 
-        JButton bStart = new JButton("Start Game");
+        JButton bStart = new JButton("Start Game (f5)");
         bStart.addActionListener(this);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 10;      
@@ -88,19 +89,27 @@ public class playerEntry extends JFrame implements ActionListener {
 
     Action startGame = new AbstractAction() {
         @Override
-        public void actionPerformed(ActionEvent e) {
-          System.out.println("Game Started");
-          playActionDisplay display = new playActionDisplay();
-          display.createGUI();
+        public void actionPerformed(ActionEvent ae) {
+          System.out.println("30 Seconds to game start");
+          timerTest test = new timerTest();
+          test.countdownTest();
+          new Timer(31_000, (e) -> { 
+            playActionDisplay display = new playActionDisplay();
+            display.createGUI();
+          }).start();
         }
-      };
+    };
     
     //Override ActionListener methods
     // @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Game Started");
-        playActionDisplay display = new playActionDisplay();
-        display.createGUI();
+    public void actionPerformed(ActionEvent ae) {
+        System.out.println("30 Seconds to game start");
+        timerTest test = new timerTest();
+        test.countdownTest();
+        new Timer(31_000, (e) -> {
+            playActionDisplay display = new playActionDisplay();
+            display.createGUI();
+        }).start();
         //System.out.println(team1Players[0][0] + " " + team1Players[0][1]);
         // String text = textField.getText();
         // textArea.append(text + newline);
