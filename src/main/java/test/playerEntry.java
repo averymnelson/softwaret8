@@ -89,7 +89,7 @@ public class playerEntry extends JFrame implements ActionListener {
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          System.out.println("F5 pressed");
+          System.out.println("Game Started");
           playActionDisplay display = new playActionDisplay();
           display.createGUI();
         }
@@ -99,6 +99,8 @@ public class playerEntry extends JFrame implements ActionListener {
     // @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Game Started");
+        playActionDisplay display = new playActionDisplay();
+        display.createGUI();
         //System.out.println(team1Players[0][0] + " " + team1Players[0][1]);
         // String text = textField.getText();
         // textArea.append(text + newline);

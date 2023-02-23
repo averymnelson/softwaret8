@@ -6,5 +6,8 @@ Avery Nelson
 Marlise Massey 
 Claire Dildy 
 
-LazerTag.java : This is like our "Game.java"
-playerEntry.java : This is where players enter their ID/codename into a table
+To run this program in VSCode, run from App.java
+
+App.java : This is the class with our Main function - where we make database connection and display logo
+playerEntry.java : This is where players enter their ID/codename into a table by JTable
+playActionDisplay.java : This is where play action is displayed 
