@@ -24,7 +24,7 @@ public class playerEntry extends JFrame implements ActionListener {
 
         // JTable table = new JTable(10, 2);
         JPanel panel = new JPanel();
-        JPanel mainPanel, subPanel1, subPanel2;
+        JPanel mainPanel, subPanel1, subPanel2, subPanel3, subPanel4;
         JFrame frame = new JFrame("Entry Terminal");
 
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game",
@@ -43,6 +43,12 @@ public class playerEntry extends JFrame implements ActionListener {
         subPanel2 = new JPanel();
         subPanel2.setBorder(BorderFactory.createTitledBorder("Team 2"));
         subPanel2.setLayout(new GridLayout(1, 1));
+        subPanel3 = new JPanel();
+        subPanel3.setBorder(BorderFactory.createTitledBorder("Team 2"));
+        subPanel3.setLayout(new GridLayout(1, 1));
+        subPanel4 = new JPanel();
+        subPanel4.setBorder(BorderFactory.createTitledBorder("Team 2"));
+        subPanel4.setLayout(new GridLayout(1, 1));
 
         String[] columnName = { "ID", "Codename" };
         JTable table1 = new JTable(team1Players, columnName);
