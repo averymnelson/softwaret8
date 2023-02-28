@@ -74,6 +74,7 @@ public class playerEntry extends JFrame implements ActionListener {
         table1.setRowHeight(26);
         table1.setGridColor(Color.gray);
         table1.setBackground(Color.pink);
+        
         table1.setRowSelectionAllowed(false);
 
         table2.setRowHeight(26);

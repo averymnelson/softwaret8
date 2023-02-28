@@ -1,8 +1,16 @@
 package test;
 
+import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 public class playActionDisplay {
+
+    public static int ID;
+    public static String fName, lName, codeName;
+    public String team1Players[][] = new String[15][2];
+    public String team2Players[][] = new String[15][2];
+
     public playActionDisplay() {
     }
 
@@ -14,5 +22,48 @@ public class playActionDisplay {
         frame.setFocusable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        JPanel mainPanel, subPanel1, subPanel2;
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Playing Current Game",
+                TitledBorder.CENTER, TitledBorder.TOP));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        mainPanel = new JPanel();
+        mainPanel.setBorder(BorderFactory.createTitledBorder("Edit Current Game"));
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        // Constructing JPanel 1 and 2 with GridLayout of 1 row and 1 column
+        subPanel1 = new JPanel();
+        subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
+        subPanel1.setLayout(new GridLayout(1, 1));
+        subPanel2 = new JPanel();
+        subPanel2.setBorder(BorderFactory.createTitledBorder("Team 2"));
+        subPanel2.setLayout(new GridLayout(1, 1));
+
+        String[] columnName = { "ID", "Codename" };
+        JTable table1 = new JTable(team1Players, columnName);
+        JTable table2 = new JTable(team2Players, columnName);
+        JScrollPane scrollPane1 = new JScrollPane(table1);
+        JScrollPane scrollPane2 = new JScrollPane(table2);
+
+        // Adding JPanel 1 and 2 to main JPanel
+        subPanel1.add(scrollPane1);
+        subPanel2.add(scrollPane2);
+        mainPanel.add(subPanel1);
+        mainPanel.add(subPanel2);
+
+        frame.add(mainPanel);
+        frame.setSize(1000, 636);
+        frame.setVisible(true);
+        table1.setRowHeight(26);
+        table1.setGridColor(Color.gray);
+        table1.setBackground(Color.pink);
+        table1.setRowSelectionAllowed(false);
+
+        table2.setRowHeight(26);
+        table2.setGridColor(Color.gray);
+        table2.setBackground(Color.pink);
+        table2.setRowSelectionAllowed(false);
     }
 }
