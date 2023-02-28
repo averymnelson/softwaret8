@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.Timer;
+import java.sql.*;
 
 //Class playerEntry : Creates tables and allows user to enter text
 public class playerEntry extends JFrame implements ActionListener {
@@ -95,6 +96,7 @@ public class playerEntry extends JFrame implements ActionListener {
             System.out.println("30 Seconds to game start");
             timerTest test = new timerTest();
             test.countdownTest();
+            connectDB();
             new Timer(31_000, (e) -> {
                 playActionDisplay display = new playActionDisplay();
                 display.createGUI();
@@ -108,6 +110,7 @@ public class playerEntry extends JFrame implements ActionListener {
         System.out.println("30 Seconds to game start");
         timerTest test = new timerTest();
         test.countdownTest();
+        connectDB();
         new Timer(31_000, (e) -> {
             playActionDisplay display = new playActionDisplay();
             display.createGUI();
@@ -120,5 +123,38 @@ public class playerEntry extends JFrame implements ActionListener {
         // // --Place first record into table
         // INSERT INTO player (id, first_name, last_name, codename)
         // VALUES (1, 'Jim', 'Strother', 'Opus');
+    }
+    
+    public void connectDB(){
+        String url="jdbc:postgresql://ec2-3-224-125-117.compute-1.amazonaws.com:5432/dfj0j6glv3vvep?sslmode=require&user=mjajmnowzmxraa&password=64e8a963ce726f7735861c6967d2ff3757b46a6c647f90ad0eee23eb5b4bd999";
+        try (Connection conn = DriverManager.getConnection(url)){
+            if (conn != null) {
+                System.out.println("Connected to the database!");
+                for(int i = 0; i < 15; i++){
+                    if(team1Players[i][0] != null && team1Players[i][1] != null){
+                        String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team1Players[i][0] + ", 'testfName', 'testlName', '" + team1Players[i][1] + "')";
+                        //String sql = "DELETE FROM player";
+                        PreparedStatement pstmt = conn.prepareStatement(sql);
+                        pstmt.executeUpdate();
+                        pstmt.close();
+                    }
+                    if(team2Players[i][0] != null && team2Players[i][1] != null){
+                        String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team2Players[i][0] + ", 'testfName', 'testlName', '" + team2Players[i][1] + "')";
+                        //String sql = "DELETE FROM player";
+                        PreparedStatement pstmt = conn.prepareStatement(sql);
+                        pstmt.executeUpdate();
+                        pstmt.close();
+                    }
+                }
+                conn.close();
+            }
+            else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
