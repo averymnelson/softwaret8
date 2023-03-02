@@ -15,6 +15,7 @@ public final class App {
         frame.setFocusable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setAlwaysOnTop(true);
         new Timer(3_000, (e) -> {
             frame.setVisible(false);
             frame.dispose();
@@ -26,8 +27,8 @@ public final class App {
      * @param args The arguments of the program.
      */
     public static void main(String[] args) {
+        ShowLogo();
         playerEntry entryScreen = new playerEntry();
         entryScreen.createGUI();
-        ShowLogo();
     }
 }

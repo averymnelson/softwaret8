@@ -15,6 +15,9 @@ public class playerEntry extends JFrame implements ActionListener {
     public static String fName, lName, codeName;
     public String team1Players[][] = new String[15][2];
     public String team2Players[][] = new String[15][2];
+    JPanel panel = new JPanel();
+    JPanel mainPanel, subPanel1, subPanel2;
+    JFrame frame = new JFrame("Entry Terminal");
 
     // Constructor
     public playerEntry() {
@@ -22,14 +25,7 @@ public class playerEntry extends JFrame implements ActionListener {
 
     // Create a table for player entry
     public void createGUI() {
-
-        // JTable table = new JTable(10, 2);
-        JPanel panel = new JPanel();
-        JPanel mainPanel, subPanel1, subPanel2;
-        JFrame frame = new JFrame("Entry Terminal");
-
-        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game",
-                TitledBorder.CENTER, TitledBorder.TOP));
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mainPanel = new JPanel();
@@ -90,6 +86,7 @@ public class playerEntry extends JFrame implements ActionListener {
         actionMap.put("Start Game", startGame);
     }
 
+    //this is called when f5 is pressed
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -97,24 +94,41 @@ public class playerEntry extends JFrame implements ActionListener {
             timerTest test = new timerTest();
             test.countdownTest();
             connectDB();
-            new Timer(31_000, (e) -> {
-                playActionDisplay display = new playActionDisplay();
-                display.createGUI();
-            }).start();
+            ActionListener taskPerformer = new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    playActionDisplay display = new playActionDisplay();
+                    display.createGUI();
+                    frame.setVisible(false);
+                    frame.dispose();
+                }
+            };
+            Timer timer = new Timer(31_000 ,taskPerformer);
+            timer.setRepeats(false);
+            timer.start();
         }
     };
 
     // Override ActionListener methods
     // @Override
+    //This method is called when the JBotton is clicked
     public void actionPerformed(ActionEvent ae) {
-        System.out.println("30 Seconds to game start");
+        System.out.println("30 Seconds to game start.");
         timerTest test = new timerTest();
         test.countdownTest();
         connectDB();
-        new Timer(31_000, (e) -> {
-            playActionDisplay display = new playActionDisplay();
-            display.createGUI();
-        }).start();
+
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                playActionDisplay display = new playActionDisplay();
+                display.createGUI();
+                frame.setVisible(false);
+                frame.dispose();
+            }
+        };
+        Timer timer = new Timer(31_000 ,taskPerformer);
+        timer.setRepeats(false);
+        timer.start();
+
         // System.out.println(team1Players[0][0] + " " + team1Players[0][1]);
         // String text = textField.getText();
         // textArea.append(text + newline);
@@ -124,9 +138,9 @@ public class playerEntry extends JFrame implements ActionListener {
         // INSERT INTO player (id, first_name, last_name, codename)
         // VALUES (1, 'Jim', 'Strother', 'Opus');
     }
-    
+
     public void connectDB(){
-        String url="jdbc:postgresql://ec2-3-224-125-117.compute-1.amazonaws.com:5432/dfj0j6glv3vvep?sslmode=require&user=mjajmnowzmxraa&password=64e8a963ce726f7735861c6967d2ff3757b46a6c647f90ad0eee23eb5b4bd999";
+        String url="jdbc:postgresql://ec2-3-219-213-121.compute-1.amazonaws.com:5432/defdh3biejj702?sslmode=require&user=sennggnbqaumyv&password=298b65e800749214bde557c4e55d199a827fb55d7a29b3e61eb79f67737e839d";
         try (Connection conn = DriverManager.getConnection(url)){
             if (conn != null) {
                 System.out.println("Connected to the database!");
