@@ -126,7 +126,7 @@ public class playerEntry extends JFrame implements ActionListener {
     }
     
     public void connectDB(){
-        String url="jdbc:postgresql://ec2-3-224-125-117.compute-1.amazonaws.com:5432/dfj0j6glv3vvep?sslmode=require&user=mjajmnowzmxraa&password=64e8a963ce726f7735861c6967d2ff3757b46a6c647f90ad0eee23eb5b4bd999";
+        String url="jdbc:postgresql://ec2-3-219-213-121.compute-1.amazonaws.com:5432/defdh3biejj702?sslmode=require&user=sennggnbqaumyv&password=298b65e800749214bde557c4e55d199a827fb55d7a29b3e61eb79f67737e839d";
         try (Connection conn = DriverManager.getConnection(url)){
             if (conn != null) {
                 System.out.println("Connected to the database!");
