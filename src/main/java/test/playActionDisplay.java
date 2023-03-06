@@ -98,4 +98,8 @@ public class playActionDisplay extends JPanel {
         //     for(int i=0; i<model.sprites.size(); i++){
         //         model.sprites.get(i).draw(g, scrollPos);
         }
+
+        public void scrollPanels(){
+        // subpanels 3 and 4 will be the scrolling panels
+        }
     }
