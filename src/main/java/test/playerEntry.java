@@ -92,9 +92,12 @@ public class playerEntry extends JFrame implements ActionListener {
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
+            //this timer is to count down to begin game
             System.out.println("30 Seconds to game start");
-            timerTest test = new timerTest();
+            //timerTest test = new timerTest();
+            timerTest test = new timerTest(0, 15);
             test.countdownTest();
+            //This Timer object controls how long Action Display is shown
             new Timer(31_000, (e) -> {
                 playActionDisplay display = new playActionDisplay();
                 display.createGUI();
@@ -105,8 +108,9 @@ public class playerEntry extends JFrame implements ActionListener {
     // Override ActionListener methods
     // @Override
     public void actionPerformed(ActionEvent ae) {
+        //clicking the button
         System.out.println("30 Seconds to game start");
-        timerTest test = new timerTest();
+        timerTest test = new timerTest(0, 15);
         test.countdownTest();
         new Timer(31_000, (e) -> {
             playActionDisplay display = new playActionDisplay();

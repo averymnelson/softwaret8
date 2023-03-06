@@ -15,7 +15,8 @@ public class timerTest {
     private JLabel label;
 
     // Constructor
-    public timerTest() {
+   // public timerTest() {
+        public timerTest(int m, int s){
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,23 +32,38 @@ public class timerTest {
         // label.setIcon(icon);
         // label.setText("Counting down"); //Can try to put the label on top of the icon
         // image if we want
-
+        
+        this.minutes = m;
+        this.seconds = s;
+        
         label.setSize(400, 400); // possibly use set bounds to be more specific about size
         // Changing fonts & text size
         label.setFont(new Font("Arial", Font.BOLD, 30));
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setText("00:30");
+        //somehow set to display the passed in min/sec
+        if(minutes < 10)
+        {
+            if(seconds < 10)
+            {
+                label.setText("0" + minutes + ":" + "0" + seconds);
+            }
+            else
+            {
+                label.setText("0" + minutes + ":" + seconds);
+            }
+        }
+        else
+        {
+            label.setText(minutes + ":" + seconds);
+        }
 
         frame.add(label);
         frame.setVisible(true);
 
-        // Adjust for time requirements later
-        minutes = 1;
-        seconds = 0;
     }
 
     public void countdownTest() {
-        int delay = 1000;
+        int delay = 1000; //count by seconds
         Timer t = new Timer(delay, null);
         t.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -69,9 +85,23 @@ public class timerTest {
                 }
                 // Decreasing the minute when seconds fall below 0, still want to display 0
                 if (seconds == -1) {
-                    seconds = 30;
+                    seconds = 59;
                     minutes--;
-                    label.setText(minutes + ":" + seconds);
+                    if(minutes < 10)
+                    {
+                        if(seconds < 10)
+                        {
+                            label.setText("0" + minutes + ":" + "0" + seconds);
+                        }
+                        else
+                        {
+                            label.setText("0" + minutes + ":" + seconds);
+                        }
+                    }
+                    else
+                    {
+                        label.setText(minutes + ":" + seconds);
+                    }
                 }
                 // Stop the timer, stop the play action
                 if (minutes == 0 && seconds == 0) {

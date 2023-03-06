@@ -16,7 +16,9 @@ public final class App {
         frame.setFocusable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        new Timer(3_000, (e) -> {
+        //This timer is to set how long logo is displayed
+        int delay = 3000;
+        new Timer(delay, (e) -> {
             frame.setVisible(false);
             frame.dispose();
         }).start();
