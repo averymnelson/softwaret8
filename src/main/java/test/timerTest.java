@@ -36,7 +36,7 @@ public class timerTest {
         // Changing fonts & text size
         label.setFont(new Font("Arial", Font.BOLD, 30));
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setText("0:30");
+        label.setText("00:30");
 
         frame.add(label);
         frame.setVisible(true);
@@ -52,7 +52,21 @@ public class timerTest {
         t.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 seconds--;
-                label.setText(minutes + ":" + seconds);
+                if(minutes < 10)
+                {
+                    if(seconds < 10)
+                    {
+                        label.setText("0" + minutes + ":" + "0" + seconds);
+                    }
+                    else
+                    {
+                        label.setText("0" + minutes + ":" + seconds);
+                    }
+                }
+                else
+                {
+                    label.setText(minutes + ":" + seconds);
+                }
                 // Decreasing the minute when seconds fall below 0, still want to display 0
                 if (seconds == -1) {
                     seconds = 30;
