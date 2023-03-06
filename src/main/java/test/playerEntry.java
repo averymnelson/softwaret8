@@ -98,7 +98,7 @@ public class playerEntry extends JFrame implements ActionListener {
             timerTest test = new timerTest(0, 15);
             test.countdownTest();
             //This Timer object controls how long Action Display is shown
-            new Timer(31_000, (e) -> {
+            new Timer(15_000, (e) -> {
                 playActionDisplay display = new playActionDisplay();
                 display.createGUI();
             }).start();
@@ -112,7 +112,7 @@ public class playerEntry extends JFrame implements ActionListener {
         System.out.println("30 Seconds to game start");
         timerTest test = new timerTest(0, 15);
         test.countdownTest();
-        new Timer(31_000, (e) -> {
+        new Timer(15_000, (e) -> {
             playActionDisplay display = new playActionDisplay();
             display.createGUI();
         }).start();
