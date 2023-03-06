@@ -11,3 +11,5 @@ To run this program in VSCode, run from App.java
 App.java : This is the class with our Main function - where we make database connection and display logo
 playerEntry.java : This is where players enter their ID/codename into a table by JTable
 playActionDisplay.java : This is where play action is displayed 
+timerTest.java : This contains the countdown timer. The timer is used to countdown to start of play and to
+                  display how much time is left in play.
