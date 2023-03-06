@@ -41,21 +41,7 @@ public class timerTest {
         label.setFont(new Font("Arial", Font.BOLD, 30));
         label.setHorizontalAlignment(JLabel.CENTER);
         //somehow set to display the passed in min/sec
-        if(minutes < 10)
-        {
-            if(seconds < 10)
-            {
-                label.setText("0" + minutes + ":" + "0" + seconds);
-            }
-            else
-            {
-                label.setText("0" + minutes + ":" + seconds);
-            }
-        }
-        else
-        {
-            label.setText(minutes + ":" + seconds);
-        }
+        labelDisplay(minutes, seconds);
 
         frame.add(label);
         frame.setVisible(true);
@@ -68,40 +54,12 @@ public class timerTest {
         t.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 seconds--;
-                if(minutes < 10)
-                {
-                    if(seconds < 10)
-                    {
-                        label.setText("0" + minutes + ":" + "0" + seconds);
-                    }
-                    else
-                    {
-                        label.setText("0" + minutes + ":" + seconds);
-                    }
-                }
-                else
-                {
-                    label.setText(minutes + ":" + seconds);
-                }
+                labelDisplay(minutes, seconds);
                 // Decreasing the minute when seconds fall below 0, still want to display 0
                 if (seconds == -1) {
                     seconds = 59;
                     minutes--;
-                    if(minutes < 10)
-                    {
-                        if(seconds < 10)
-                        {
-                            label.setText("0" + minutes + ":" + "0" + seconds);
-                        }
-                        else
-                        {
-                            label.setText("0" + minutes + ":" + seconds);
-                        }
-                    }
-                    else
-                    {
-                        label.setText(minutes + ":" + seconds);
-                    }
+                    labelDisplay(minutes, seconds);
                 }
                 // Stop the timer, stop the play action
                 if (minutes == 0 && seconds == 0) {
@@ -111,5 +69,24 @@ public class timerTest {
             }
         });
         t.start();
+    }
+
+    public void labelDisplay(int min, int sec)
+    {
+        if(minutes < 10)
+        {
+            if(seconds < 10)
+            {
+                label.setText("0" + min + ":" + "0" + sec);
+            }
+            else
+            {
+                label.setText("0" + min + ":" + sec);
+            }
+        }
+        else
+        {
+            label.setText(min + ":" + sec);
+        }
     }
 }
