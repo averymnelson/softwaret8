@@ -1,11 +1,9 @@
 package test;
 
-//import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-
-import java.awt.Color;
-import java.awt.Graphics;
+// import javax.swing.border.TitledBorder;
+// import javax.swing.undo.StateEditable;
+import java.awt.*;
 
 public class playActionDisplay extends JPanel {
 
@@ -18,63 +16,131 @@ public class playActionDisplay extends JPanel {
     }
 
     public void createGUI() {
-        JPanel mainPanel, subPanel1, subPanel2, subPanel3, subPanel4;
+        JPanel mainPanel, subPanel1, subPanel2, subPanel3;
         JFrame frame = new JFrame();
+        //JPanel panel = new JPanel();
+        JScrollPane scrollPane1 = new JScrollPane();
+
+        String[] columnName = {"Code Name", "Score"};
+        JTable table1 = new JTable(team1Players, columnName);
+        JScrollPane scrollPane2 = new JScrollPane(table1);
+        JTable table2 = new JTable(team2Players, columnName);
+        JScrollPane scrollPane3 = new JScrollPane(table2);
+        //Figure out how to set table to uneditable
+
+        // JTextField team1Scores = new JTextField("Score!");
+        // team1Scores.setEditable(false);
+        // team1Scores.setHorizontalAlignment(JTextField.RIGHT);
+
+        //panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         mainPanel = new JPanel();
-        frame.add(mainPanel);
-        frame.setSize(1000, 300);
-        frame.setFocusable(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Playing Current Game",
-            TitledBorder.CENTER, TitledBorder.TOP));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        mainPanel.setBorder(BorderFactory.createTitledBorder("Edit Current Game"));
-
+        mainPanel.setBorder(BorderFactory.createTitledBorder("Playing Current Game"));
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        // Constructing JPanel 1 and 2 with GridLayout of 1 row and 1 column
         subPanel1 = new JPanel();
         subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
-
+        subPanel1.setLayout(new GridLayout(1, 2));
+        //subPanel1.add(team1Scores);
+        subPanel1.add(scrollPane2);
+        
         subPanel2 = new JPanel();
-        subPanel2.setBorder(BorderFactory.createTitledBorder("Team 1 Log"));
+        subPanel2.setBorder(BorderFactory.createTitledBorder("Team 2"));
+        subPanel2.setLayout(new GridLayout(1, 2));
+        subPanel2.add(scrollPane3);
 
         subPanel3 = new JPanel();
-        subPanel3.setBorder(BorderFactory.createTitledBorder("Team 2"));
+        subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
+        subPanel3.setLayout(new GridLayout(1, 1));
 
-        subPanel4 = new JPanel();
-        subPanel4.setBorder(BorderFactory.createTitledBorder("Team 2 Log"));
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 240;
+        c.ipadx = 400;
+        c.weightx = 0.0;
+        c.gridx = 0;
+        c.gridy = 0;
+        mainPanel.add(subPanel1, c);
 
-        JScrollPane scrollPane1 = new JScrollPane();
-        JScrollPane scrollPane2 = new JScrollPane();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 240;
+        c.ipadx = 400;
+        c.weightx = 0.0;
+        c.gridx = 1;
+        c.gridy = 0;
+        mainPanel.add(subPanel2, c);
 
-        subPanel1.add(scrollPane1);
-        subPanel2.add(scrollPane2);
-        mainPanel.add(subPanel1);
-        mainPanel.add(subPanel2);
-        mainPanel.add(subPanel3);
-        mainPanel.add(subPanel4);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 250;
+        c.ipadx = 800;
+        c.weightx = 0.0;
+        c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 1;
+        mainPanel.add(subPanel3, c);
 
+        // Adding JPanel 1 and 2 to main JPanel
+        subPanel3.add(scrollPane1);
         frame.add(mainPanel);
         frame.setSize(1000, 636);
         frame.setVisible(true);
-        //repaint is currently doing nothing
-        subPanel1.repaint();
 
-        GroupLayout layout = new GroupLayout(mainPanel);
-        mainPanel.setLayout(layout);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
-        GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-        hGroup.addGroup(layout.createParallelGroup().addComponent(subPanel1).addComponent(subPanel2));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(subPanel3).addComponent(subPanel4));
-        layout.setHorizontalGroup(hGroup);
-        GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(subPanel1)
-            .addComponent(subPanel3));
-        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(subPanel2)
-            .addComponent(subPanel4));
-        layout.setVerticalGroup(vGroup);
+        // mainPanel = new JPanel();
+        // frame.add(mainPanel);
+        // frame.setSize(1000, 300);
+        // frame.setFocusable(true);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setVisible(true);
+
+        // mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Playing Current Game",
+        //     TitledBorder.CENTER, TitledBorder.TOP));
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // mainPanel.setBorder(BorderFactory.createTitledBorder("Edit Current Game"));
+
+        // subPanel1 = new JPanel();
+        // subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
+
+        // subPanel2 = new JPanel();
+        // subPanel2.setBorder(BorderFactory.createTitledBorder("Team 1 Log"));
+
+        // subPanel3 = new JPanel();
+        // subPanel3.setBorder(BorderFactory.createTitledBorder("Team 2"));
+
+        // subPanel4 = new JPanel();
+        // subPanel4.setBorder(BorderFactory.createTitledBorder("Team 2 Log"));
+
+        // JScrollPane scrollPane1 = new JScrollPane();
+        // JScrollPane scrollPane2 = new JScrollPane();
+
+        // subPanel1.add(scrollPane1);
+        // subPanel2.add(scrollPane2);
+        // mainPanel.add(subPanel1);
+        // mainPanel.add(subPanel2);
+        // mainPanel.add(subPanel3);
+        // //mainPanel.add(subPanel4);
+
+        // frame.add(mainPanel);
+        // frame.setSize(1000, 636);
+        // frame.setVisible(true);
+        // //repaint is currently doing nothing
+        // subPanel1.repaint();
+
+        // GroupLayout layout = new GroupLayout(mainPanel);
+        // mainPanel.setLayout(layout);
+        // layout.setAutoCreateGaps(true);
+        // layout.setAutoCreateContainerGaps(true);
+        // GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
+        // hGroup.addGroup(layout.createParallelGroup().addComponent(subPanel1).addComponent(subPanel2));
+        // hGroup.addGroup(layout.createParallelGroup().addComponent(subPanel3));
+        // layout.setHorizontalGroup(hGroup);
+        // // GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+        // // vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(subPanel1)
+        // //     .addComponent(subPanel3));
+        // // vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(subPanel2)
+        // //     .addComponent(subPanel4));
+        // //layout.setVerticalGroup(vGroup);
     }
     //adjust bottom two tables to scroll
 
