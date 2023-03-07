@@ -15,7 +15,7 @@ public class timerTest {
     private JLabel label;
 
     // Constructor
-    public timerTest() {
+    public timerTest(int m, int s) {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,19 +31,18 @@ public class timerTest {
         // label.setIcon(icon);
         // label.setText("Counting down"); //Can try to put the label on top of the icon
         // image if we want
-
+        
+        minutes = m;
+        seconds = s;
+        
         label.setSize(400, 400); // possibly use set bounds to be more specific about size
         // Changing fonts & text size
         label.setFont(new Font("Arial", Font.BOLD, 30));
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setText("0:30");
+        labelDisplay(minutes, seconds);
 
         frame.add(label);
-        frame.setVisible(true);
-
-        // Adjust for time requirements later
-        minutes = 1;
-        seconds = 0;
+        frame.setVisible(true); 
     }
 
     public void countdownTest() {
@@ -52,12 +51,12 @@ public class timerTest {
         t.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 seconds--;
-                label.setText(minutes + ":" + seconds);
+                labelDisplay(minutes, seconds);
                 // Decreasing the minute when seconds fall below 0, still want to display 0
                 if (seconds == -1) {
-                    seconds = 30;
+                    seconds = 59;
                     minutes--;
-                    label.setText(minutes + ":" + seconds);
+                    labelDisplay(minutes, seconds);
                 }
                 // Stop the timer, stop the play action
                 if (minutes == 0 && seconds == 0) {
@@ -67,5 +66,29 @@ public class timerTest {
             }
         });
         t.start();
+    }
+
+    //formats the timer display to show as "##:##"
+    public void labelDisplay(int min, int sec)
+    {
+        if(min < 10)
+        {
+            if(sec < 10)
+            {
+                label.setText("0" + min + ":0" + sec);
+            }
+            else
+            {
+                label.setText("0" + min + ":" + sec);
+            }
+        }
+        else if(sec < 10)
+        {
+            label.setText(min + ":0" + sec);
+        }
+        else
+        {
+            label.setText(min + ":" + sec);
+        }
     }
 }

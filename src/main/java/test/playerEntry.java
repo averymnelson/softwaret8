@@ -18,6 +18,11 @@ public class playerEntry extends JFrame implements ActionListener {
     JPanel panel = new JPanel();
     JPanel mainPanel, subPanel1, subPanel2;
     JFrame frame = new JFrame("Entry Terminal");
+    
+    //use these variables to change how long timer runs
+    int min = 0;
+    int sec = 10;
+    int delay = (min * 60 + sec + 1) * 1000; //you don't have to adjust this line
 
     // Constructor
     public playerEntry() {
@@ -90,10 +95,11 @@ public class playerEntry extends JFrame implements ActionListener {
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            System.out.println("30 Seconds to game start");
-            timerTest test = new timerTest();
-            test.countdownTest();
             connectDB();
+            System.out.println((delay/1000 -1) + " Seconds to game start");
+            timerTest test = new timerTest(min, sec);
+            test.countdownTest();
+            
             ActionListener taskPerformer = new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     playActionDisplay display = new playActionDisplay();
@@ -102,7 +108,7 @@ public class playerEntry extends JFrame implements ActionListener {
                     frame.dispose();
                 }
             };
-            Timer timer = new Timer(31_000 ,taskPerformer);
+            Timer timer = new Timer(delay ,taskPerformer);
             timer.setRepeats(false);
             timer.start();
         }
@@ -112,10 +118,10 @@ public class playerEntry extends JFrame implements ActionListener {
     // @Override
     //This method is called when the JBotton is clicked
     public void actionPerformed(ActionEvent ae) {
-        System.out.println("30 Seconds to game start.");
-        timerTest test = new timerTest();
-        test.countdownTest();
         connectDB();
+        System.out.println((delay/1000 -1) + " Seconds to game start");
+        timerTest test = new timerTest(min, sec);
+        test.countdownTest();
 
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -125,7 +131,7 @@ public class playerEntry extends JFrame implements ActionListener {
                 frame.dispose();
             }
         };
-        Timer timer = new Timer(31_000 ,taskPerformer);
+        Timer timer = new Timer(delay,taskPerformer);
         timer.setRepeats(false);
         timer.start();
 
