@@ -1,8 +1,6 @@
 package test;
 
 import javax.swing.*;
-// import javax.swing.border.TitledBorder;
-// import javax.swing.undo.StateEditable;
 import java.awt.*;
 
 public class playActionDisplay extends JPanel {
@@ -13,6 +11,9 @@ public class playActionDisplay extends JPanel {
     }
 
     public String[][] teamPlayers(int team){
+        //this function takes the playeer entry array code name values 
+        //it adds a default score of 0 to each player 
+        //adds a default total team score of 0 to each team
         for(int i = 0; i < 15; i++){
             if(playerEntry.team1Players[i][0] != null && playerEntry.team1Players[i][1] != null){
                 team1Players[i][0] = playerEntry.team1Players[i][1];
@@ -54,14 +55,11 @@ public class playActionDisplay extends JPanel {
         table2.setBackground(new Color(255, 192, 203));
         table2.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane3 = new JScrollPane(table2);
-        //Figure out how to set table to uneditable
-        //above is done
 
-        // JTextField team1Scores = new JTextField("Score!");
-        // team1Scores.setEditable(false);
-        // team1Scores.setHorizontalAlignment(JTextField.RIGHT);
+        JTextField gameLogs = new JTextField("Player hit player");
+        gameLogs.setEditable(false);
+        //gameLogs.setHorizontalAlignment(JTextField.NORTH_WEST);
 
-        //panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mainPanel = new JPanel();
@@ -72,7 +70,6 @@ public class playActionDisplay extends JPanel {
         subPanel1 = new JPanel();
         subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
         subPanel1.setLayout(new GridLayout(1, 2));
-        //subPanel1.add(team1Scores);
         subPanel1.add(scrollPane2);
         
         subPanel2 = new JPanel();
@@ -83,12 +80,12 @@ public class playActionDisplay extends JPanel {
         subPanel3 = new JPanel();
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
+        subPanel3.add(gameLogs);
         // JScrollPane scrPane = new JScrollPane(subPanel3);
         // JScrollPane scrPane2 = new JScrollPane(subPanel3);
         // add(scrPane); // similar to getContentPane().add(scrPane);
         // add(scrPane2);
         // // Now, you can add whatever you want to the container
-
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 255;
@@ -120,65 +117,7 @@ public class playActionDisplay extends JPanel {
         frame.add(mainPanel);
         frame.setSize(1000, 636);
         frame.setVisible(true);
-
-        // mainPanel = new JPanel();
-        // frame.add(mainPanel);
-        // frame.setSize(1000, 300);
-        // frame.setFocusable(true);
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setVisible(true);
-
-        // mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Playing Current Game",
-        //     TitledBorder.CENTER, TitledBorder.TOP));
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // mainPanel.setBorder(BorderFactory.createTitledBorder("Edit Current Game"));
-
-        // subPanel1 = new JPanel();
-        // subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
-
-        // subPanel2 = new JPanel();
-        // subPanel2.setBorder(BorderFactory.createTitledBorder("Team 1 Log"));
-
-        // subPanel3 = new JPanel();
-        // subPanel3.setBorder(BorderFactory.createTitledBorder("Team 2"));
-
-        // subPanel4 = new JPanel();
-        // subPanel4.setBorder(BorderFactory.createTitledBorder("Team 2 Log"));
-
-        // JScrollPane scrollPane1 = new JScrollPane();
-        // JScrollPane scrollPane2 = new JScrollPane();
-
-        // subPanel1.add(scrollPane1);
-        // subPanel2.add(scrollPane2);
-        // mainPanel.add(subPanel1);
-        // mainPanel.add(subPanel2);
-        // mainPanel.add(subPanel3);
-        // //mainPanel.add(subPanel4);
-
-        // frame.add(mainPanel);
-        // frame.setSize(1000, 636);
-        // frame.setVisible(true);
-        // //repaint is currently doing nothing
-        // subPanel1.repaint();
-
-        // GroupLayout layout = new GroupLayout(mainPanel);
-        // mainPanel.setLayout(layout);
-        // layout.setAutoCreateGaps(true);
-        // layout.setAutoCreateContainerGaps(true);
-        // GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-        // hGroup.addGroup(layout.createParallelGroup().addComponent(subPanel1).addComponent(subPanel2));
-        // hGroup.addGroup(layout.createParallelGroup().addComponent(subPanel3));
-        // layout.setHorizontalGroup(hGroup);
-        // // GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-        // // vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(subPanel1)
-        // //     .addComponent(subPanel3));
-        // // vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(subPanel2)
-        // //     .addComponent(subPanel4));
-        // //layout.setVerticalGroup(vGroup);
     }
-    //adjust bottom two tables to scroll
-
     //adjust top two to pull from database list players
     //add points field should stay 0 though
     public void paintComponent(Graphics g){
