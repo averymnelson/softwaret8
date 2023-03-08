@@ -36,7 +36,7 @@ public class playActionDisplay extends JPanel {
     }
 
     public void createGUI() {
-        JPanel mainPanel, subPanel1, subPanel2, subPanel3;
+        JPanel mainPanel, subPanel1, subPanel2, subPanel3, displayCountdown;
         JFrame frame = new JFrame("Play Action Display");
         JScrollPane scrollPane1 = new JScrollPane();
         String[] columnName = {"Code Name", "Score"};
@@ -88,8 +88,13 @@ public class playActionDisplay extends JPanel {
         // add(scrPane); // similar to getContentPane().add(scrPane);
         // add(scrPane2);
         // // Now, you can add whatever you want to the container
+        
+        //NEW :::: Adding a count down timer to top of frame
+        displayCountdown = new JPanel();
+        displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
+        displayCountdown.setLayout(new GridLayout(1,1));
 
-
+        //Team 1
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 255;
         c.ipadx = 400;
@@ -97,7 +102,7 @@ public class playActionDisplay extends JPanel {
         c.gridx = 0;
         c.gridy = 0;
         mainPanel.add(subPanel1, c);
-
+        //Team 2
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 255;
         c.ipadx = 400;
@@ -105,7 +110,7 @@ public class playActionDisplay extends JPanel {
         c.gridx = 1;
         c.gridy = 0;
         mainPanel.add(subPanel2, c);
-
+        //Game log
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 235;
         c.ipadx = 800;
@@ -114,6 +119,15 @@ public class playActionDisplay extends JPanel {
         c.gridx = 0;
         c.gridy = 1;
         mainPanel.add(subPanel3, c);
+        //Countdown display
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 100;
+        c.ipadx = 100;
+        c.weightx = 0.0;
+        c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 2;
+        mainPanel.add(displayCountdown, c);
 
         // Adding JPanel 1 and 2 to main JPanel
         subPanel3.add(scrollPane1);
