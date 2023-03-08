@@ -44,13 +44,18 @@ public class playActionDisplay extends JPanel {
         JTable table1 = new JTable(teamPlayers(1), columnName);
         table1.setShowGrid(false);
         table1.setIntercellSpacing(new Dimension(0, 0));
+        table1.setBackground(new Color(216, 191, 216));
+        table1.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane2 = new JScrollPane(table1);
 
         JTable table2 = new JTable(teamPlayers(2), columnName);
         table2.setShowGrid(false);
         table2.setIntercellSpacing(new Dimension(0, 0));
+        table2.setBackground(new Color(255, 192, 203));
+        table2.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane3 = new JScrollPane(table2);
         //Figure out how to set table to uneditable
+        //above is done
 
         // JTextField team1Scores = new JTextField("Score!");
         // team1Scores.setEditable(false);
@@ -78,6 +83,12 @@ public class playActionDisplay extends JPanel {
         subPanel3 = new JPanel();
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
+        // JScrollPane scrPane = new JScrollPane(subPanel3);
+        // JScrollPane scrPane2 = new JScrollPane(subPanel3);
+        // add(scrPane); // similar to getContentPane().add(scrPane);
+        // add(scrPane2);
+        // // Now, you can add whatever you want to the container
+
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 255;

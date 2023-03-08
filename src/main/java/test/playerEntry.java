@@ -25,6 +25,7 @@ public class playerEntry extends JFrame implements ActionListener {
 
     // Create a table for player entry
     public void createGUI() {
+        System.out.println("When entering players, your ID should be your player number on your team (0-16).");
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
