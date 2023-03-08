@@ -6,25 +6,49 @@ import javax.swing.*;
 import java.awt.*;
 
 public class playActionDisplay extends JPanel {
-
-    public static int ID;
-    public static String fName, lName, codeName;
-    public String[][] team1Players = new String[15][2];
-    public String[][] team2Players = new String[15][2];
+    public String[][] team1Players = new String[16][2];
+    public String[][] team2Players = new String[16][2];
 
     public playActionDisplay() {
     }
 
+    public String[][] teamPlayers(int team){
+        for(int i = 0; i < 15; i++){
+            if(playerEntry.team1Players[i][0] != null && playerEntry.team1Players[i][1] != null){
+                team1Players[i][0] = playerEntry.team1Players[i][1];
+                team1Players[i][1] = "0";
+                team2Players[i][0] = playerEntry.team2Players[i][1];
+                team2Players[i][1] = "0";
+            }
+        }
+
+        team1Players[15][0] = "Total Score";
+        team1Players[15][1] = "0";
+        team2Players[15][0] = "Total Score";
+        team2Players[15][1] = "0";
+
+        if(team == 1)
+            return team1Players;
+        if(team == 2)
+            return team2Players;
+        else
+            return null;
+    }
+
     public void createGUI() {
         JPanel mainPanel, subPanel1, subPanel2, subPanel3;
-        JFrame frame = new JFrame();
-        //JPanel panel = new JPanel();
+        JFrame frame = new JFrame("Play Action Display");
         JScrollPane scrollPane1 = new JScrollPane();
-
         String[] columnName = {"Code Name", "Score"};
-        JTable table1 = new JTable(team1Players, columnName);
+
+        JTable table1 = new JTable(teamPlayers(1), columnName);
+        table1.setShowGrid(false);
+        table1.setIntercellSpacing(new Dimension(0, 0));
         JScrollPane scrollPane2 = new JScrollPane(table1);
-        JTable table2 = new JTable(team2Players, columnName);
+
+        JTable table2 = new JTable(teamPlayers(2), columnName);
+        table2.setShowGrid(false);
+        table2.setIntercellSpacing(new Dimension(0, 0));
         JScrollPane scrollPane3 = new JScrollPane(table2);
         //Figure out how to set table to uneditable
 
@@ -56,7 +80,7 @@ public class playActionDisplay extends JPanel {
         subPanel3.setLayout(new GridLayout(1, 1));
 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 240;
+        c.ipady = 255;
         c.ipadx = 400;
         c.weightx = 0.0;
         c.gridx = 0;
@@ -64,7 +88,7 @@ public class playActionDisplay extends JPanel {
         mainPanel.add(subPanel1, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 240;
+        c.ipady = 255;
         c.ipadx = 400;
         c.weightx = 0.0;
         c.gridx = 1;
@@ -72,7 +96,7 @@ public class playActionDisplay extends JPanel {
         mainPanel.add(subPanel2, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 250;
+        c.ipady = 235;
         c.ipadx = 800;
         c.weightx = 0.0;
         c.gridwidth = 2;
