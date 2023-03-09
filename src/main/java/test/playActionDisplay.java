@@ -10,12 +10,12 @@ public class playActionDisplay extends JPanel {
     public playActionDisplay() {
     }
 
-    public String[][] teamPlayers(int team){
-        //this function takes the playeer entry array code name values 
-        //it adds a default score of 0 to each player 
-        //adds a default total team score of 0 to each team
-        for(int i = 0; i < 15; i++){
-            if(playerEntry.team1Players[i][0] != null && playerEntry.team1Players[i][1] != null){
+    public String[][] teamPlayers(int team) {
+        // this function takes the playeer entry array code name values
+        // it adds a default score of 0 to each player
+        // adds a default total team score of 0 to each team
+        for (int i = 0; i < 15; i++) {
+            if (playerEntry.team1Players[i][0] != null && playerEntry.team1Players[i][1] != null) {
                 team1Players[i][0] = playerEntry.team1Players[i][1];
                 team1Players[i][1] = "0";
                 team2Players[i][0] = playerEntry.team2Players[i][1];
@@ -28,9 +28,9 @@ public class playActionDisplay extends JPanel {
         team2Players[15][0] = "Total Score";
         team2Players[15][1] = "0";
 
-        if(team == 1)
+        if (team == 1)
             return team1Players;
-        if(team == 2)
+        if (team == 2)
             return team2Players;
         else
             return null;
@@ -40,7 +40,7 @@ public class playActionDisplay extends JPanel {
         JPanel mainPanel, subPanel1, subPanel2, subPanel3;
         JFrame frame = new JFrame("Play Action Display");
         JScrollPane scrollPane1 = new JScrollPane();
-        String[] columnName = {"Code Name", "Score"};
+        String[] columnName = { "Code Name", "Score" };
 
         JTable table1 = new JTable(teamPlayers(1), columnName);
         table1.setShowGrid(false);
@@ -56,9 +56,8 @@ public class playActionDisplay extends JPanel {
         table2.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane3 = new JScrollPane(table2);
 
-        JTextField gameLogs = new JTextField("Player hit player");
+        JTextField gameLogs = new JTextField(team1Players[0][0] + " hit " + team2Players[0][0]);
         gameLogs.setEditable(false);
-        //gameLogs.setHorizontalAlignment(JTextField.NORTH_WEST);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -66,12 +65,12 @@ public class playActionDisplay extends JPanel {
         mainPanel.setBorder(BorderFactory.createTitledBorder("Playing Current Game"));
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        // Constructing JPanel 1 and 2 with GridLayout of 1 row and 1 column
+
         subPanel1 = new JPanel();
         subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
         subPanel1.setLayout(new GridLayout(1, 2));
         subPanel1.add(scrollPane2);
-        
+
         subPanel2 = new JPanel();
         subPanel2.setBorder(BorderFactory.createTitledBorder("Team 2"));
         subPanel2.setLayout(new GridLayout(1, 2));
@@ -81,11 +80,6 @@ public class playActionDisplay extends JPanel {
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
         subPanel3.add(gameLogs);
-        // JScrollPane scrPane = new JScrollPane(subPanel3);
-        // JScrollPane scrPane2 = new JScrollPane(subPanel3);
-        // add(scrPane); // similar to getContentPane().add(scrPane);
-        // add(scrPane2);
-        // // Now, you can add whatever you want to the container
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 255;
@@ -112,34 +106,9 @@ public class playActionDisplay extends JPanel {
         c.gridy = 1;
         mainPanel.add(subPanel3, c);
 
-        // Adding JPanel 1 and 2 to main JPanel
         subPanel3.add(scrollPane1);
         frame.add(mainPanel);
         frame.setSize(1000, 636);
         frame.setVisible(true);
     }
-    //adjust top two to pull from database list players
-    //add points field should stay 0 though
-    public void paintComponent(Graphics g){
-        super.paintComponent(g); 
-        g.drawString("string literal or a string variable", 0,10);
-        g.setColor(new Color(227, 115, 131));
-        g.fillRect(0,0,this.getWidth(), this.getHeight());
-
-        //in game.java from mario (in the run function):
-        //view.repaint();
-        //in view.java from mario:
-        // public void paintComponent(Graphics g){
-        //     g.setColor(new Color(128,255,255));
-        //     scrollPos=model.mario.x-100;
-        //     g.fillRect(0,0,this.getWidth(), this.getHeight());
-        //     g.setColor(Color.gray);
-        //     g.drawLine(0, 596, 2000, 596);
-        //     for(int i=0; i<model.sprites.size(); i++){
-        //         model.sprites.get(i).draw(g, scrollPos);
-        }
-
-        public void scrollPanels(){
-        // subpanels 3 and 4 will be the scrolling panels
-        }
-    }
+}

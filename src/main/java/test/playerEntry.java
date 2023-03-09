@@ -28,7 +28,6 @@ public class playerEntry extends JFrame implements ActionListener {
     public playerEntry() {
     }
 
-    // Create a table for player entry
     public void createGUI() {
         System.out.println("When entering players, your ID should be your player number on your team (0-16).");
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
@@ -39,7 +38,6 @@ public class playerEntry extends JFrame implements ActionListener {
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        // Constructing JPanel 1 and 2 with GridLayout of 1 row and 1 column
         subPanel1 = new JPanel();
         subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
         subPanel1.setLayout(new GridLayout(1, 1));
@@ -62,7 +60,6 @@ public class playerEntry extends JFrame implements ActionListener {
         c.gridx = 0;
         c.gridy = 1;
 
-        // Adding JPanel 1 and 2 to main JPanel
         subPanel1.add(scrollPane1);
         subPanel2.add(scrollPane2);
         mainPanel.add(subPanel1);
@@ -136,14 +133,6 @@ public class playerEntry extends JFrame implements ActionListener {
         timer.setRepeats(false);
         timer.start();
 
-        // System.out.println(team1Players[0][0] + " " + team1Players[0][1]);
-        // String text = textField.getText();
-        // textArea.append(text + newline);
-        // //Sets the position of the text insertion
-        // textArea.setCaretPosition(textArea.getDocument().getLength());
-        // // --Place first record into table
-        // INSERT INTO player (id, first_name, last_name, codename)
-        // VALUES (1, 'Jim', 'Strother', 'Opus');
     }
 
     public void connectDB(){
@@ -154,14 +143,12 @@ public class playerEntry extends JFrame implements ActionListener {
                 for(int i = 0; i < 15; i++){
                     if(team1Players[i][0] != null && team1Players[i][1] != null){
                         String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team1Players[i][0] + ", 'testfName', 'testlName', '" + team1Players[i][1] + "')";
-                        //String sql = "DELETE FROM player";
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         pstmt.executeUpdate();
                         pstmt.close();
                     }
                     if(team2Players[i][0] != null && team2Players[i][1] != null){
                         String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team2Players[i][0] + ", 'testfName', 'testlName', '" + team2Players[i][1] + "')";
-                        //String sql = "DELETE FROM player";
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         pstmt.executeUpdate();
                         pstmt.close();

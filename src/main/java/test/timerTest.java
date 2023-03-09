@@ -67,7 +67,6 @@ public class timerTest {
         });
         t.start();
     }
-
     //formats the timer display to show as "##:##"
     public void labelDisplay(int min, int sec)
     {
