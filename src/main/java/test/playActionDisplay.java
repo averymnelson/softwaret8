@@ -56,6 +56,7 @@ public class playActionDisplay extends JPanel {
         table2.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane3 = new JScrollPane(table2);
 
+        //do we want this printing everyone as part of the test or just one to show it works?
         JTextField gameLogs = new JTextField(team1Players[0][0] + " hit " + team2Players[0][0]);
         gameLogs.setEditable(false);
 
