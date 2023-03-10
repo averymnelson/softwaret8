@@ -83,6 +83,9 @@ public class playerEntry extends JFrame implements ActionListener {
         table2.setGridColor(Color.gray);
         table2.setBackground(Color.pink);
         table2.setRowSelectionAllowed(false);
+
+        //key bind to enter and/or tab key to call connectDB function
+        connectDB();
     }
 
     private void addKeyBind(JComponent contentPane, String key) {
@@ -119,7 +122,7 @@ public class playerEntry extends JFrame implements ActionListener {
     // @Override
     //This method is called when the JBotton is clicked
     public void actionPerformed(ActionEvent ae) {
-        connectDB();
+        insertDB();
         System.out.println((delay/1000 - 1) + " Seconds to game start");
         timerTest test = new timerTest(min, sec);
         test.countdownTest();
@@ -146,11 +149,11 @@ public class playerEntry extends JFrame implements ActionListener {
         // VALUES (1, 'Jim', 'Strother', 'Opus');
     }
 
-    public void connectDB(){
+    public void insertDB(){
         String url="jdbc:postgresql://ec2-3-219-213-121.compute-1.amazonaws.com:5432/defdh3biejj702?sslmode=require&user=sennggnbqaumyv&password=298b65e800749214bde557c4e55d199a827fb55d7a29b3e61eb79f67737e839d";
         try (Connection conn = DriverManager.getConnection(url)){
             if (conn != null) {
-                System.out.println("Connected to the database!");
+                System.out.println("Connected to the database! Inserting Players");
                 for(int i = 0; i < 15; i++){
                     if(team1Players[i][0] != null && team1Players[i][1] != null){
                         String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team1Players[i][0] + ", 'testfName', 'testlName', '" + team1Players[i][1] + "')";
@@ -162,6 +165,43 @@ public class playerEntry extends JFrame implements ActionListener {
                     if(team2Players[i][0] != null && team2Players[i][1] != null){
                         String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team2Players[i][0] + ", 'testfName', 'testlName', '" + team2Players[i][1] + "')";
                         //String sql = "DELETE FROM player";
+                        PreparedStatement pstmt = conn.prepareStatement(sql);
+                        pstmt.executeUpdate();
+                        pstmt.close();
+                    }
+                }
+                conn.close();
+            }
+            else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void connectDB(){
+        String url="jdbc:postgresql://ec2-3-219-213-121.compute-1.amazonaws.com:5432/defdh3biejj702?sslmode=require&user=sennggnbqaumyv&password=298b65e800749214bde557c4e55d199a827fb55d7a29b3e61eb79f67737e839d";
+        try (Connection conn = DriverManager.getConnection(url)){
+            if (conn != null) {
+                System.out.println("Connected to the database!");
+                for(int i = 0; i < 15; i++){
+                    if(team1Players[i][0] != null){
+                        //String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team1Players[i][0] + ", 'testfName', 'testlName', '" + team1Players[i][1] + "')";
+                        //String sql = "DELETE FROM player";
+                        String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
+                        System.out.println(team1Players[i][0]);
+                        PreparedStatement pstmt = conn.prepareStatement(sql);
+                        pstmt.executeUpdate();
+                        pstmt.close();
+                    }
+                    if(team2Players[i][0] != null){
+                        //String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES (" + team2Players[i][0] + ", 'testfName', 'testlName', '" + team2Players[i][1] + "')";
+                        //String sql = "DELETE FROM player";
+                        String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
+                        System.out.println(team1Players[i][0]);
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         pstmt.executeUpdate();
                         pstmt.close();
