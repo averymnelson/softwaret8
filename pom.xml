@@ -89,6 +89,7 @@
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <skip>${skipTests}</skip>
         </configuration>
+
         <!-- <executions>
           <execution>
             <id>checkstyle</id>
