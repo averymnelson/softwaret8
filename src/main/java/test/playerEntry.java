@@ -260,12 +260,20 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                             if (team1Players[i][0] != null) {
                                 if (id.equals(team1Players[i][0])) {
                                     team1Players[i][1] = codename;
-                                    System.out.println("match found");
                                 } else {
                                     System.out.println("_______" + id + "_____________");
                                     System.out.println("-------" + team1Players[0][0] + "-------------");
-                                    System.out.println("no match because ID2 is " + id + " and id being checked is "
-                                            + team1Players[i][0]);
+                                }
+                            }
+                        }
+                        for (int i = 0; i < 15; i++) {
+                            // System.out.println("checking interior");
+                            if (team2Players[i][0] != null) {
+                                if (id.equals(team2Players[i][0])) {
+                                    team2Players[i][1] = codename;
+                                } else {
+                                    System.out.println("_______" + id + "_____________");
+                                    System.out.println("-------" + team2Players[0][0] + "-------------");
                                 }
                             }
                         }
