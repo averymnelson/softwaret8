@@ -8,18 +8,21 @@ import javax.swing.border.TitledBorder;
 // import javax.swing.event.TableModelListener;
 // import javax.swing.table.TableModel;
 import javax.swing.Timer;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 import java.sql.*;
 
 //Class playerEntry : Creates tables and allows user to enter text
-public class playerEntry extends JFrame implements ActionListener, KeyListener {
+public class playerEntry extends JFrame implements ActionListener, KeyListener, TableModelListener {
 
     // Instance variables/constants
     public static int ID;
     public static String fName, lName, codeName;
     public static String team1Players[][] = new String[15][2];
     public static String team2Players[][] = new String[15][2];
-    // private TableModel model;
-    // private TableModel model2;
+     private TableModel model;
+     private TableModel model2;
     String url = "jdbc:postgresql://ec2-3-219-213-121.compute-1.amazonaws.com:5432/defdh3biejj702?sslmode=require&user=sennggnbqaumyv&password=298b65e800749214bde557c4e55d199a827fb55d7a29b3e61eb79f67737e839d";
     JPanel panel = new JPanel();
     JPanel mainPanel, subPanel1, subPanel2;
@@ -86,27 +89,25 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
         table1.setGridColor(Color.gray);
         table1.setBackground(Color.pink);
         table1.setRowSelectionAllowed(false);
-        // model = table1.getModel();
-        // model.addTableModelListener(this);
+         model = table1.getModel();
+         model.addTableModelListener(this);
 
         table2.setRowHeight(26);
         table2.setGridColor(Color.gray);
         table2.setBackground(Color.pink);
         table2.setRowSelectionAllowed(false);
-        // model2 = table2.getModel();
-        // model2.addTableModelListener(this);
+         model2 = table2.getModel();
+         model2.addTableModelListener(this);
 
         // key bind to enter and/or tab key to call connectDB function
         // connectDB();
     }
 
     private void addKeyBind(JComponent contentPane, String key) {
-        if (key == "F5") {
             InputMap inputMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
             ActionMap actionMap = contentPane.getActionMap();
             inputMap.put(KeyStroke.getKeyStroke(key), "Start Game");
             actionMap.put("Start Game", startGame);
-        }
     }
 
     // this is called when f5 is pressed
@@ -133,12 +134,12 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
     };
 
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_ENTER:
-                viewTable(team1Players);
-                viewTable(team2Players);
-                break;
-        }
+//        switch (e.getKeyCode()) {
+//            case KeyEvent.VK_ENTER:
+//                viewTable(team1Players);
+//                viewTable(team2Players);
+//                break;
+//        }
     }
 
     public void keyReleased(KeyEvent e) {
@@ -242,7 +243,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
     // }
     // }
 
-    public void viewTable(String[][] team) {
+    public void viewTable() {
         // System.out.println("table called");
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
@@ -257,7 +258,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
                         for (int i = 0; i < 15; i++) {
                             // System.out.println("checking interior");
                             if (team1Players[i][0] != null) {
-                                if (id == team1Players[i][0].trim()) {
+                                if (id.equals(team1Players[i][0])) {
                                     team1Players[i][1] = codename;
                                     System.out.println("match found");
                                 } else {
@@ -309,9 +310,8 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
     // team[row][col] = value;
     // }
 
-    // @Override
-    // public void tableChanged(TableModelEvent e) {
-    // viewTable(team1Players);
-    // viewTable(team2Players);
-    // }
+     @Override
+     public void tableChanged(TableModelEvent e) {
+     viewTable();
+     }
 }
