@@ -82,11 +82,6 @@ public class playActionDisplay extends JPanel {
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
         subPanel3.add(gameLogs);
-        // JScrollPane scrPane = new JScrollPane(subPanel3);
-        // JScrollPane scrPane2 = new JScrollPane(subPanel3);
-        // add(scrPane); // similar to getContentPane().add(scrPane);
-        // add(scrPane2);
-        // // Now, you can add whatever you want to the container
 
         // NEW :::: Adding a count down timer to top of frame
         displayCountdown = new JPanel();
@@ -133,30 +128,5 @@ public class playActionDisplay extends JPanel {
         frame.add(mainPanel);
         frame.setSize(1000, 636);
         frame.setVisible(true);
-    }
-
-    // adjust top two to pull from database list players
-    // add points field should stay 0 though
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawString("string literal or a string variable", 0, 10);
-        g.setColor(new Color(227, 115, 131));
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
-
-        // in game.java from mario (in the run function):
-        // view.repaint();
-        // in view.java from mario:
-        // public void paintComponent(Graphics g){
-        // g.setColor(new Color(128,255,255));
-        // scrollPos=model.mario.x-100;
-        // g.fillRect(0,0,this.getWidth(), this.getHeight());
-        // g.setColor(Color.gray);
-        // g.drawLine(0, 596, 2000, 596);
-        // for(int i=0; i<model.sprites.size(); i++){
-        // model.sprites.get(i).draw(g, scrollPos);
-    }
-
-    public void scrollPanels() {
-        // subpanels 3 and 4 will be the scrolling panels
     }
 }

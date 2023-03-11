@@ -30,5 +30,6 @@ public final class App {
         ShowLogo();
         playerEntry entryScreen = new playerEntry();
         entryScreen.createGUI();
+        entryScreen.viewDATA();
     }
 }

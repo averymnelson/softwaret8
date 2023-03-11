@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+// import javax.swing.event.TableModelEvent;
+// import javax.swing.event.TableModelListener;
+// import javax.swing.table.TableModel;
 import javax.swing.Timer;
 import java.sql.*;
 
@@ -15,6 +18,8 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
     public static String fName, lName, codeName;
     public static String team1Players[][] = new String[15][2];
     public static String team2Players[][] = new String[15][2];
+    // private TableModel model;
+    // private TableModel model2;
     String url = "jdbc:postgresql://ec2-3-219-213-121.compute-1.amazonaws.com:5432/defdh3biejj702?sslmode=require&user=sennggnbqaumyv&password=298b65e800749214bde557c4e55d199a827fb55d7a29b3e61eb79f67737e839d";
     JPanel panel = new JPanel();
     JPanel mainPanel, subPanel1, subPanel2;
@@ -65,7 +70,6 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
         c.gridx = 0;
         c.gridy = 1;
 
-        // Adding JPanel 1 and 2 to main JPanel
         subPanel1.add(scrollPane1);
         subPanel2.add(scrollPane2);
         mainPanel.add(subPanel1);
@@ -75,35 +79,41 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
         frame.setSize(1000, 636);
         mainPanel.add(bStart, c);
         addKeyBind(mainPanel, "F5");
-        // addKeyBind(mainPanel, "l");
+        addKeyBind(mainPanel, "Enter");
         frame.setVisible(true);
 
         table1.setRowHeight(26);
         table1.setGridColor(Color.gray);
         table1.setBackground(Color.pink);
         table1.setRowSelectionAllowed(false);
+        // model = table1.getModel();
+        // model.addTableModelListener(this);
 
         table2.setRowHeight(26);
         table2.setGridColor(Color.gray);
         table2.setBackground(Color.pink);
         table2.setRowSelectionAllowed(false);
+        // model2 = table2.getModel();
+        // model2.addTableModelListener(this);
 
         // key bind to enter and/or tab key to call connectDB function
-        connectDB();
+        // connectDB();
     }
 
     private void addKeyBind(JComponent contentPane, String key) {
+        if (key == "F5") {
             InputMap inputMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
             ActionMap actionMap = contentPane.getActionMap();
             inputMap.put(KeyStroke.getKeyStroke(key), "Start Game");
             actionMap.put("Start Game", startGame);
+        }
     }
 
     // this is called when f5 is pressed
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            connectDB();
+            // onnectDB();
             System.out.println((delay / 1000 - 1) + " Seconds to game start");
             timerTest test = new timerTest(min, sec);
             test.countdownTest();
@@ -121,23 +131,37 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
             timer.start();
         }
     };
-    public void keyPressed(KeyEvent e){}
-    public void keyReleased(KeyEvent e){
-        switch(e.getKeyCode())
-		{
-			case KeyEvent.VK_ENTER: viewTable(team1Players); viewTable(team2Players); break;
+
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_ENTER:
+                viewTable(team1Players);
+                viewTable(team2Players);
+                break;
         }
     }
-    public void keyTyped(KeyEvent e){}
 
-    // Override ActionListener methods
-    // @Override
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
     // This method is called when the JBotton is clicked
     public void actionPerformed(ActionEvent ae) {
         insertDB();
         System.out.println((delay / 1000 - 1) + " Seconds to game start");
         timerTest test = new timerTest(min, sec);
         test.countdownTest();
+        for (int i = 0; i < team1Players.length; i++) {
+            System.out.println(team1Players[i][0] + "_" + team1Players[i][1]);
+        }
+        System.out.println("\n");
+        for (int i = 0; i < team2Players.length; i++) {
+            System.out.println(team2Players[i][0] + "_" + team2Players[i][1]);
+        }
+        System.out.println("\n");
+        viewDATA();
 
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -150,15 +174,6 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
         Timer timer = new Timer(delay, taskPerformer);
         timer.setRepeats(false);
         timer.start();
-
-        // System.out.println(team1Players[0][0] + " " + team1Players[0][1]);
-        // String text = textField.getText();
-        // textArea.append(text + newline);
-        // //Sets the position of the text insertion
-        // textArea.setCaretPosition(textArea.getDocument().getLength());
-        // // --Place first record into table
-        // INSERT INTO player (id, first_name, last_name, codename)
-        // VALUES (1, 'Jim', 'Strother', 'Opus');
     }
 
     public void insertDB() {
@@ -167,9 +182,11 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
                 System.out.println("Connected to the database! Inserting Players.");
                 for (int i = 0; i < 15; i++) {
                     if (team1Players[i][0] != null && team1Players[i][1] != null) {
+                        // int savingID = Integer.parseInt(team1Players[i][0]);
                         String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES ("
                                 + team1Players[i][0] + ", 'testfName', 'testlName', '" + team1Players[i][1] + "')";
                         // String sql = "DELETE FROM player";
+                        System.out.println(sql);
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         pstmt.executeUpdate();
                         pstmt.close();
@@ -194,39 +211,69 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
         }
     }
 
-    public void connectDB() {
+    // public void connectDB() {
+    // try (Connection conn = DriverManager.getConnection(url)) {
+    // if (conn != null) {
+    // System.out.println("Connected to the database!");
+    // for (int i = 0; i < 15; i++) {
+    // if (team1Players[i][0] != null) {
+    // String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
+    // System.out.println(team1Players[i][0]);
+    // PreparedStatement pstmt = conn.prepareStatement(sql);
+    // pstmt.executeUpdate();
+    // pstmt.close();
+    // }
+    // if (team2Players[i][0] != null) {
+    // String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
+    // System.out.println(team1Players[i][0]);
+    // PreparedStatement pstmt = conn.prepareStatement(sql);
+    // pstmt.executeUpdate();
+    // pstmt.close();
+    // }
+    // }
+    // conn.close();
+    // } else {
+    // System.out.println("Failed to make connection!");
+    // }
+    // } catch (SQLException e) {
+    // System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
+
+    public void viewTable(String[][] team) {
+        // System.out.println("table called");
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
-                System.out.println("Connected to the database!");
-                for (int i = 0; i < 15; i++) {
-                    if (team1Players[i][0] != null) {
-                        // String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES
-                        // (" + team1Players[i][0] + ", 'testfName', 'testlName', '" +
-                        // team1Players[i][1] + "')";
-                        // String sql = "DELETE FROM player";
-                        //viewTable(conn, team1Players);
-                        String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
-                        System.out.println(team1Players[i][0]);
-                        PreparedStatement pstmt = conn.prepareStatement(sql);
-                        pstmt.executeUpdate();
-                        pstmt.close();
+                String query = "select ID, CODENAME from PLAYER";
+                try (Statement stmt = conn.createStatement()) {
+                    ResultSet rs = stmt.executeQuery(query);
+                    while (rs.next()) {
+                        String codename = rs.getString("CODENAME");
+                        String id = rs.getString("ID");
+                        // String ID2 = String.valueOf(id);
+                        // System.out.println(codename + ", " + ID2);
+                        for (int i = 0; i < 15; i++) {
+                            // System.out.println("checking interior");
+                            if (team1Players[i][0] != null) {
+                                if (id == team1Players[i][0].trim()) {
+                                    team1Players[i][1] = codename;
+                                    System.out.println("match found");
+                                } else {
+                                    System.out.println("_______" + id + "_____________");
+                                    System.out.println("-------" + team1Players[0][0] + "-------------");
+                                    System.out.println("no match because ID2 is " + id + " and id being checked is "
+                                            + team1Players[i][0]);
+                                }
+                            }
+                        }
                     }
-                    if (team2Players[i][0] != null) {
-                        // String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES
-                        // (" + team2Players[i][0] + ", 'testfName', 'testlName', '" +
-                        // team2Players[i][1] + "')";
-                        // String sql = "DELETE FROM player";
-                        //viewTable(conn, team2Players);
-                        String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
-                        System.out.println(team1Players[i][0]);
-                        PreparedStatement pstmt = conn.prepareStatement(sql);
-                        pstmt.executeUpdate();
-                        pstmt.close();
-                    }
+                } catch (SQLException e) {
+                    System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                conn.close();
-            } else {
-                System.out.println("Failed to make connection!");
             }
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -235,23 +282,21 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
         }
     }
 
-    public void viewTable(String[][] team){
-        try (Connection conn = DriverManager.getConnection(url)) {
-            if (conn != null) {
-                String query = "SELECT id, codename FROM player";
-                try (Statement stmt = conn.createStatement()) {
+    public void viewDATA() {
+        try (Connection con = DriverManager.getConnection(url)) {
+            if (con != null) {
+                String query = "select ID, CODENAME from PLAYER";
+                try (Statement stmt = con.createStatement()) {
                     ResultSet rs = stmt.executeQuery(query);
                     while (rs.next()) {
-                        String codename = rs.getString("codename");
-                        int id = rs.getInt("id");
-                        String ID2=String.valueOf(id);
-                        System.out.println(ID2);
-                        for (int i = 0; i < team.length; i++) {
-                            if (team[i][0] == ID2)
-                                team[i][1] = codename;
-                            System.out.println("match found");
-                        }
+                        String coffeeName = rs.getString("CODENAME");
+                        int supplierID = rs.getInt("ID");
+                        System.out.println(supplierID + "_" + coffeeName);
                     }
+                } catch (SQLException e) {
+                    System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         } catch (SQLException e) {
@@ -260,4 +305,13 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener {
             e.printStackTrace();
         }
     }
+    // public void setValueAt(String[][] team, String value, int row, int col) {
+    // team[row][col] = value;
+    // }
+
+    // @Override
+    // public void tableChanged(TableModelEvent e) {
+    // viewTable(team1Players);
+    // viewTable(team2Players);
+    // }
 }
