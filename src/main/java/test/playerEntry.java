@@ -4,9 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-// import javax.swing.event.TableModelEvent;
-// import javax.swing.event.TableModelListener;
-// import javax.swing.table.TableModel;
 import javax.swing.Timer;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -30,7 +27,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
 
     // use these variables to control how long the timer runs
     int min = 0;
-    int sec = 10;
+    int sec = 30;
     int delay = (min * 60 + sec + 1) * 1000; // don't adjust this
 
     // Constructor
@@ -39,8 +36,6 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
 
     // Create a table for player entry
     public void createGUI() {
-        // System.out.println("When entering players, your ID should be your player
-        // number on your team (0-16).");
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game",
                 TitledBorder.CENTER, TitledBorder.TOP));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,9 +93,6 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         table2.setRowSelectionAllowed(false);
          model2 = table2.getModel();
          model2.addTableModelListener(this);
-
-        // key bind to enter and/or tab key to call connectDB function
-        // connectDB();
     }
 
     private void addKeyBind(JComponent contentPane, String key) {
@@ -212,39 +204,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         }
     }
 
-    // public void connectDB() {
-    // try (Connection conn = DriverManager.getConnection(url)) {
-    // if (conn != null) {
-    // System.out.println("Connected to the database!");
-    // for (int i = 0; i < 15; i++) {
-    // if (team1Players[i][0] != null) {
-    // String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
-    // System.out.println(team1Players[i][0]);
-    // PreparedStatement pstmt = conn.prepareStatement(sql);
-    // pstmt.executeUpdate();
-    // pstmt.close();
-    // }
-    // if (team2Players[i][0] != null) {
-    // String sql = "SELECT codename FROM player WHERE id = " + team1Players[i][0];
-    // System.out.println(team1Players[i][0]);
-    // PreparedStatement pstmt = conn.prepareStatement(sql);
-    // pstmt.executeUpdate();
-    // pstmt.close();
-    // }
-    // }
-    // conn.close();
-    // } else {
-    // System.out.println("Failed to make connection!");
-    // }
-    // } catch (SQLException e) {
-    // System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-
     public void viewTable() {
-        // System.out.println("table called");
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 String query = "select ID, CODENAME from PLAYER";

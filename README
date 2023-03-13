@@ -6,7 +6,7 @@ Avery Nelson
 Marlise Massey 
 Claire Dildy 
 
-To run this program in VSCode, run from App.java
+To run this program in VSCode, run from App.java with VsCode java extensions installed
 
 App.java : This is the class with our Main function - where we make database connection and display logo
 playerEntry.java : This is where players enter their ID/codename into a table by JTable
