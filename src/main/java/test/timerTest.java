@@ -14,12 +14,12 @@ public class timerTest {
     int seconds, minutes;
     private JLabel label;
 
-    // Constructor
+    // Constructor: pass in the minutes and seconds needed for the timer
     public timerTest(int m, int s) {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        label = new JLabel("Game label"); // possible to change the font
+        //label = new JLabel("Game label"); // possible to change the font
 
         // For adding an icon which can be behind the count down
         // ImageIcon icon = new ImageIcon("timer.png");
@@ -45,6 +45,7 @@ public class timerTest {
         frame.setVisible(true);
     }
 
+    //Begins the timer count down
     public void countdownTest() {
         int delay = 1000;
         Timer t = new Timer(delay, null);
@@ -73,14 +74,10 @@ public class timerTest {
     {
         if(min < 10)
         {
-            if(sec < 10)
-            {
-                label.setText("0" + min + ":0" + sec);
-            }
-            else
-            {
-                label.setText("0" + min + ":" + sec);
-            }
+            if(sec < 10){
+                label.setText("0" + min + ":0" + sec);}
+            else{
+                label.setText("0" + min + ":" + sec);}
         }
         else if(sec < 10)
         {
@@ -90,6 +87,12 @@ public class timerTest {
         {
             label.setText(min + ":" + sec);
         }
+    }
+
+    //Creates a new frame for count down before game begins
+    public void createFrame()
+    {
+
     }
 
 }
