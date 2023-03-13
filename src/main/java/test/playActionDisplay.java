@@ -2,6 +2,7 @@ package test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class playActionDisplay extends JPanel {
     public String[][] team1Players = new String[16][2];
@@ -128,5 +129,11 @@ public class playActionDisplay extends JPanel {
         frame.add(mainPanel);
         frame.setSize(1000, 636);
         frame.setVisible(true);
+
+        // try {
+        //     udpBaseServer_2.createSocket();
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 }
