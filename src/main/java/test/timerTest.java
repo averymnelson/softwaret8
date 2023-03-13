@@ -19,7 +19,7 @@ public class timerTest {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //label = new JLabel("Game label"); // possible to change the font
+        label = new JLabel("Game label"); // possible to change the font
 
         // For adding an icon which can be behind the count down
         // ImageIcon icon = new ImageIcon("timer.png");
