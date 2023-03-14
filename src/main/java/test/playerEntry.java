@@ -82,14 +82,14 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
 
         table1.setRowHeight(26);
         table1.setGridColor(Color.gray);
-        table1.setBackground(Color.pink);
+        table1.setBackground(new Color(216, 191, 216));
         table1.setRowSelectionAllowed(false);
          model = table1.getModel();
          model.addTableModelListener(this);
 
         table2.setRowHeight(26);
         table2.setGridColor(Color.gray);
-        table2.setBackground(Color.pink);
+        table2.setBackground(new Color(255, 192, 203));
         table2.setRowSelectionAllowed(false);
          model2 = table2.getModel();
          model2.addTableModelListener(this);
