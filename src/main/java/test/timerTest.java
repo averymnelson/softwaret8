@@ -16,9 +16,9 @@ public class timerTest {
 
     // Constructor: pass in the minutes and seconds needed for the timer
     public timerTest(int m, int s) {
-        JFrame frame = new JFrame();
-        frame.setSize(600, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // JFrame frame = new JFrame();
+        // frame.setSize(600, 600);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         label = new JLabel("Game label"); // possible to change the font
 
         // For adding an icon which can be behind the count down
@@ -40,9 +40,8 @@ public class timerTest {
         label.setFont(new Font("Arial", Font.BOLD, 30));
         label.setHorizontalAlignment(JLabel.CENTER);
         labelDisplay(minutes, seconds);
-
-        frame.add(label);
-        frame.setVisible(true);
+        // frame.add(label);
+        // frame.setVisible(true);
     }
 
     //Begins the timer count down
@@ -92,7 +91,11 @@ public class timerTest {
     //Creates a new frame for count down before game begins
     public void createFrame()
     {
-
+        JFrame frame = new JFrame();
+        frame.setSize(600, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(this.label);
+        frame.setVisible(true);
     }
 
 }

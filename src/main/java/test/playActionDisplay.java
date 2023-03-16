@@ -87,6 +87,13 @@ public class playActionDisplay extends JPanel {
         displayCountdown = new JPanel();
         displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
         displayCountdown.setLayout(new GridLayout(1, 1));
+        Component countDownTimer;
+        timerTest count = new timerTest(6,0);
+        //JTextField gameCount = new JTextField( "Time" + (timerTest c = new timerTest(6,0)));
+        //gameCount.setEditable(false);
+        //displayCountdown.add(new timerTest(6, 0));
+        displayCountdown.add(countDownTimer);
+        ((timerTest) countDownTimer).countdownTest();
 
         // Team 1
         c.fill = GridBagConstraints.HORIZONTAL;
