@@ -3,15 +3,17 @@ package test;
 import javax.swing.*;
 import java.awt.*;
 
+//Class for the the current game play
 public class playActionDisplay extends JPanel {
     public String[][] team1Players = new String[16][2];
     public String[][] team2Players = new String[16][2];
-
+    
+    //Constructor 
     public playActionDisplay() {
     }
 
     public String[][] teamPlayers(int team) {
-        // this function takes the playeer entry array code name values
+        // this function takes the player entry array code name values
         // it adds a default score of 0 to each player
         // adds a default total team score of 0 to each team
         for (int i = 0; i < 15; i++) {
@@ -36,19 +38,23 @@ public class playActionDisplay extends JPanel {
             return null;
     }
 
+    //This function creates the layout for the JFrame: Play action display
     public void createGUI() {
-        JPanel mainPanel, subPanel1, subPanel2, subPanel3, displayCountdown;
         JFrame frame = new JFrame("Play Action Display");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //This frame consists of 5 subpanels
+        JPanel mainPanel, subPanel1, subPanel2, subPanel3, displayCountdown;
         JScrollPane scrollPane1 = new JScrollPane();
         String[] columnName = { "Code Name", "Score" };
 
+        //Team 1 table
         JTable table1 = new JTable(teamPlayers(1), columnName);
         table1.setShowGrid(false);
         table1.setIntercellSpacing(new Dimension(0, 0));
         table1.setBackground(new Color(216, 191, 216));
         table1.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane2 = new JScrollPane(table1);
-
+        //Team 2 table
         JTable table2 = new JTable(teamPlayers(2), columnName);
         table2.setShowGrid(false);
         table2.setIntercellSpacing(new Dimension(0, 0));
@@ -60,9 +66,8 @@ public class playActionDisplay extends JPanel {
         JTextField gameLogs = new JTextField(team1Players[0][0] + " hit " + team2Players[0][0]);
         gameLogs.setEditable(false);
         // gameLogs.setHorizontalAlignment(JTextField.NORTH_WEST);
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
+        //The main panel contains all other panels 
         mainPanel = new JPanel();
         mainPanel.setBorder(BorderFactory.createTitledBorder("Playing Current Game"));
         mainPanel.setLayout(new GridBagLayout());
@@ -81,19 +86,30 @@ public class playActionDisplay extends JPanel {
         subPanel3 = new JPanel();
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
+        subPanel3.add(scrollPane1);
         subPanel3.add(gameLogs);
 
         // NEW :::: Adding a count down timer to top of frame
         displayCountdown = new JPanel();
         displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
         displayCountdown.setLayout(new GridLayout(1, 1));
-        Component countDownTimer;
-        timerTest count = new timerTest(6,0);
+        
+        JLabel l = new JLabel("Count down");
+        l.setSize(20,20);
+        l.setFont(new Font("Arial", Font.BOLD, 30));
+        l.setHorizontalAlignment(JLabel.CENTER);
+        l.setVisible(true);
+
+        //displayCountdown.add(l);
+        //timerTest count = new timerTest(6,0);
         //JTextField gameCount = new JTextField( "Time" + (timerTest c = new timerTest(6,0)));
         //gameCount.setEditable(false);
         //displayCountdown.add(new timerTest(6, 0));
-        displayCountdown.add(countDownTimer);
-        ((timerTest) countDownTimer).countdownTest();
+       // displayCountdown.add(countDownTimer);
+        //((timerTest) countDownTimer).countdownTest();
+       // displayCountdown.add(l);
+       displayCountdown.setVisible(true);
+       displayCountdown.add(l);
 
         // Team 1
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -123,7 +139,7 @@ public class playActionDisplay extends JPanel {
         // Countdown display
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 100;
-        c.ipadx = 100;
+        c.ipadx = 50;
         c.weightx = 0.0;
         c.gridwidth = 2;
         c.gridx = 0;
@@ -131,8 +147,9 @@ public class playActionDisplay extends JPanel {
         mainPanel.add(displayCountdown, c);
 
         // Adding JPanel 1 and 2 to main JPanel
-        subPanel3.add(scrollPane1);
+        // subPanel3.add(scrollPane1);
         frame.add(mainPanel);
+        //frame.pack();
         frame.setSize(1000, 636);
         frame.setVisible(true);
     }

@@ -27,7 +27,8 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
 
     // use these variables to control how long the timer runs
     int min = 0;
-    int sec = 30;
+    int sec = 10;
+    //int sec = 30;
     int delay = (min * 60 + sec + 1) * 1000; // don't adjust this
 
     // Constructor
@@ -74,6 +75,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         mainPanel.add(subPanel2);
 
         frame.add(mainPanel);
+        //frame.pack();
         frame.setSize(1000, 636);
         mainPanel.add(bStart, c);
         addKeyBind(mainPanel, "F5");

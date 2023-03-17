@@ -6,6 +6,8 @@ import java.awt.event.ActionListener; //using action listener b/c I believe this
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import java.awt.Color;
 import java.awt.Font;
 
 public class timerTest {
@@ -13,7 +15,7 @@ public class timerTest {
     // Instance variables
     int seconds, minutes;
     private JLabel label;
-
+    //private JFrame frame;
     // Constructor: pass in the minutes and seconds needed for the timer
     public timerTest(int m, int s) {
         // JFrame frame = new JFrame();
@@ -52,6 +54,10 @@ public class timerTest {
             public void actionPerformed(ActionEvent evt) {
                 seconds--;
                 labelDisplay(minutes, seconds);
+                //Changing text color when 10 seconds remains
+                if(seconds < 11){
+                    label.setForeground(Color.RED);
+                }
                 // Decreasing the minute when seconds fall below 0, still want to display 0
                 if (seconds == -1) {
                     seconds = 30;
@@ -61,6 +67,8 @@ public class timerTest {
                 // Stop the timer, stop the play action
                 if (minutes == 0 && seconds == 0) {
                     t.stop();
+                    //frame.close();
+                    //frame.setVisible(false);
                     return;
                 }
             }
@@ -92,10 +100,15 @@ public class timerTest {
     public void createFrame()
     {
         JFrame frame = new JFrame();
-        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this.label);
+        //frame.pack();
+        frame.setSize(600, 600);
         frame.setVisible(true);
+        //Trying to close the frame if time 00:00
+        if(minutes == 0 && seconds == 0){
+            frame.setVisible(false);
+        }
     }
 
 }
