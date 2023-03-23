@@ -12,10 +12,8 @@ public class playActionDisplay extends JPanel {
     public playActionDisplay() {
     }
 
+    //This function takes player entry code names and adds default score of 0 to each player/team
     public String[][] teamPlayers(int team) {
-        // this function takes the player entry array code name values
-        // it adds a default score of 0 to each player
-        // adds a default total team score of 0 to each team
         for (int i = 0; i < 15; i++) {
             if (playerEntry.team1Players[i][0] != null && playerEntry.team1Players[i][1] != null) {
                 team1Players[i][0] = playerEntry.team1Players[i][1];
@@ -24,12 +22,10 @@ public class playActionDisplay extends JPanel {
                 team2Players[i][1] = "0";
             }
         }
-
         team1Players[15][0] = "Total Score";
         team1Players[15][1] = "0";
         team2Players[15][0] = "Total Score";
         team2Players[15][1] = "0";
-
         if (team == 1)
             return team1Players;
         if (team == 2)
@@ -38,13 +34,36 @@ public class playActionDisplay extends JPanel {
             return null;
     }
 
+    public JPanel gameTime(){
+        JPanel countDownPanel = new JPanel();
+        countDownPanel.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
+        countDownPanel.setLayout(new GridLayout(1, 1));
+
+        //Update the labels contents and repaint the panel?
+        JLabel l = new JLabel("Count down");
+        l.setSize(100,20);
+        l.setFont(new Font("Arial", Font.BOLD, 16));
+        l.setHorizontalAlignment(JLabel.CENTER);
+        //l.setVisible(true);
+        timerTest t = new timerTest(6, 0);
+        t.countdownTest();
+        //t.labelDisplay(6, 0);
+       // l.setText(Integer.toString(t.minutes) + Integer.toString(t.seconds));
+        //l.setText(t.countdownTest());
+        l.setText(t.labelDisplay(6, 0)); //need to somehow update the label with every second
+        //countDownPanel.setVisible(true);
+        //panel add label
+        countDownPanel.add(l);
+        return countDownPanel;
+    }
+
     //This function creates the layout for the JFrame: Play action display
     public void createGUI() {
         JFrame frame = new JFrame("Play Action Display");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //This frame consists of 5 subpanels
-        JPanel mainPanel, subPanel1, subPanel2, subPanel3, displayCountdown;
-        JScrollPane scrollPane1 = new JScrollPane();
+        JPanel mainPanel, subPanel1, subPanel2, subPanel3;
+        //displayCountdown;
         String[] columnName = { "Code Name", "Score" };
 
         //Team 1 table
@@ -65,14 +84,14 @@ public class playActionDisplay extends JPanel {
         // do we want this printing everyone as part of the test or just one to show it works?
         JTextField gameLogs = new JTextField(team1Players[0][0] + " hit " + team2Players[0][0]);
         gameLogs.setEditable(false);
-        // gameLogs.setHorizontalAlignment(JTextField.NORTH_WEST);
+        //gameLogs.setHorizontalAlignment(JTextField.NORTH_WEST);
         
         //The main panel contains all other panels 
         mainPanel = new JPanel();
         mainPanel.setBorder(BorderFactory.createTitledBorder("Playing Current Game"));
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        // Constructing JPanel 1 and 2 with GridLayout of 1 row and 1 column
+        // Constructing JPanel 1 and 2 with GridLayout
         subPanel1 = new JPanel();
         subPanel1.setBorder(BorderFactory.createTitledBorder("Team 1"));
         subPanel1.setLayout(new GridLayout(1, 2));
@@ -86,30 +105,24 @@ public class playActionDisplay extends JPanel {
         subPanel3 = new JPanel();
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
-        subPanel3.add(scrollPane1);
+        JScrollPane scrollPane1 = new JScrollPane();
+        //subPanel3.add(scrollPane1);
         subPanel3.add(gameLogs);
 
-        // NEW :::: Adding a count down timer to top of frame
-        displayCountdown = new JPanel();
-        displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
-        displayCountdown.setLayout(new GridLayout(1, 1));
-        
-        JLabel l = new JLabel("Count down");
-        l.setSize(20,20);
-        l.setFont(new Font("Arial", Font.BOLD, 30));
-        l.setHorizontalAlignment(JLabel.CENTER);
-        l.setVisible(true);
+        // NEW :::: Adding a game timer
+        // displayCountdown = new JPanel();
+        // displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
+        // displayCountdown.setLayout(new GridLayout(1, 1));
+        // JLabel l = new JLabel("Count down");
+        // l.setSize(20,20);
+        // l.setFont(new Font("Arial", Font.BOLD, 30));
+        // l.setHorizontalAlignment(JLabel.CENTER);
+        // l.setVisible(true);
+        // displayCountdown.setVisible(true);
+        // displayCountdown.add(l);
 
-        //displayCountdown.add(l);
-        //timerTest count = new timerTest(6,0);
-        //JTextField gameCount = new JTextField( "Time" + (timerTest c = new timerTest(6,0)));
-        //gameCount.setEditable(false);
-        //displayCountdown.add(new timerTest(6, 0));
        // displayCountdown.add(countDownTimer);
         //((timerTest) countDownTimer).countdownTest();
-       // displayCountdown.add(l);
-       displayCountdown.setVisible(true);
-       displayCountdown.add(l);
 
         // Team 1
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -137,17 +150,18 @@ public class playActionDisplay extends JPanel {
         c.gridy = 1;
         mainPanel.add(subPanel3, c);
         // Countdown display
+        JPanel countDownPanel = gameTime();
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 100;
-        c.ipadx = 50;
+        c.ipady = 50;
+        c.ipadx = 800;
         c.weightx = 0.0;
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 2;
-        mainPanel.add(displayCountdown, c);
+        mainPanel.add(countDownPanel, c);
 
         // Adding JPanel 1 and 2 to main JPanel
-        // subPanel3.add(scrollPane1);
+        subPanel3.add(scrollPane1);
         frame.add(mainPanel);
         //frame.pack();
         frame.setSize(1000, 636);

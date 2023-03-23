@@ -77,8 +77,9 @@ public class timerTest {
     }
 
     //formats the timer display to show as "##:##"
-    public void labelDisplay(int min, int sec)
+    public String labelDisplay(int min, int sec)
     {
+        String s = "00:00";
         if(min < 10)
         {
             if(sec < 10){
@@ -94,6 +95,7 @@ public class timerTest {
         {
             label.setText(min + ":" + sec);
         }
+        return s;
     }
 
     //Creates a new frame for count down before game begins
