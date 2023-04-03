@@ -1,6 +1,5 @@
 package test;
 
-//imports
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener; //using action listener b/c I believe this is how we can stop play
 import javax.swing.JFrame;
@@ -43,7 +42,7 @@ public class timerTest {
         label.setHorizontalAlignment(JLabel.CENTER);
         labelDisplay(minutes, seconds);
         // frame.add(label);
-        // frame.setVisible(true);
+        //frame.setVisible(true);
     }
 
     //Begins the timer count down
@@ -55,12 +54,13 @@ public class timerTest {
                 seconds--;
                 labelDisplay(minutes, seconds);
                 //Changing text color when 10 seconds remains
-                if(seconds < 11){
+                if(seconds < 11 && minutes == 0)
+                {
                     label.setForeground(Color.RED);
                 }
                 // Decreasing the minute when seconds fall below 0, still want to display 0
                 if (seconds == -1) {
-                    seconds = 30;
+                    seconds = 59;
                     minutes--;
                     labelDisplay(minutes, seconds);
                 }
@@ -82,10 +82,14 @@ public class timerTest {
         String s = "00:00";
         if(min < 10)
         {
-            if(sec < 10){
-                label.setText("0" + min + ":0" + sec);}
-            else{
-                label.setText("0" + min + ":" + sec);}
+            if(sec < 10)
+            {
+                label.setText("0" + min + ":0" + sec);
+            }
+            else
+            {
+                label.setText("0" + min + ":" + sec);
+            }
         }
         else if(sec < 10)
         {
@@ -107,7 +111,7 @@ public class timerTest {
         //frame.pack();
         frame.setSize(600, 600);
         frame.setVisible(true);
-        //Trying to close the frame if time 00:00
+        //Trying to close the frame if time is 00:00
         if(minutes == 0 && seconds == 0){
             frame.setVisible(false);
         }

@@ -2,12 +2,18 @@ package test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener; 
 
 //Class for the the current game play
 public class playActionDisplay extends JPanel {
     public String[][] team1Players = new String[16][2];
     public String[][] team2Players = new String[16][2];
-    
+
+    int minutes = 6;
+    int seconds = 0;
+    private JLabel l;
+
     //Constructor 
     public playActionDisplay() {
     }
@@ -40,19 +46,13 @@ public class playActionDisplay extends JPanel {
         countDownPanel.setLayout(new GridLayout(1, 1));
 
         //Update the labels contents and repaint the panel?
-        JLabel l = new JLabel("Count down");
+        l = new JLabel("Count down");
         l.setSize(100,20);
         l.setFont(new Font("Arial", Font.BOLD, 16));
         l.setHorizontalAlignment(JLabel.CENTER);
-        //l.setVisible(true);
-        timerTest t = new timerTest(6, 0);
-        t.countdownTest();
-        //t.labelDisplay(6, 0);
-       // l.setText(Integer.toString(t.minutes) + Integer.toString(t.seconds));
-        //l.setText(t.countdownTest());
-        l.setText(t.labelDisplay(6, 0)); //need to somehow update the label with every second
-        //countDownPanel.setVisible(true);
-        //panel add label
+        labelDisplay(minutes, seconds);
+        countdownTest();
+
         countDownPanel.add(l);
         return countDownPanel;
     }
@@ -109,21 +109,6 @@ public class playActionDisplay extends JPanel {
         //subPanel3.add(scrollPane1);
         subPanel3.add(gameLogs);
 
-        // NEW :::: Adding a game timer
-        // displayCountdown = new JPanel();
-        // displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
-        // displayCountdown.setLayout(new GridLayout(1, 1));
-        // JLabel l = new JLabel("Count down");
-        // l.setSize(20,20);
-        // l.setFont(new Font("Arial", Font.BOLD, 30));
-        // l.setHorizontalAlignment(JLabel.CENTER);
-        // l.setVisible(true);
-        // displayCountdown.setVisible(true);
-        // displayCountdown.add(l);
-
-       // displayCountdown.add(countDownTimer);
-        //((timerTest) countDownTimer).countdownTest();
-
         // Team 1
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 310;
@@ -166,5 +151,66 @@ public class playActionDisplay extends JPanel {
         //frame.pack();
         frame.setSize(1000, 636);
         frame.setVisible(true);
+    }
+
+    //Begins the timer count down
+    public void countdownTest() {
+        int delay = 1000;
+        Timer t = new Timer(delay, null);
+        t.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                seconds--;
+                labelDisplay(minutes, seconds);
+                //Changing text color when 10 seconds remains
+                if(seconds < 11 && minutes == 0)
+                {
+                    l.setForeground(Color.RED);
+                }
+                // Decreasing the minute when seconds fall below 0, still want to display 0
+                if (seconds == -1) 
+                {
+                    seconds = 59;
+                    minutes--;
+                    labelDisplay(minutes, seconds);
+                }
+                // Stop the timer, stop the play action
+                if (minutes == 0 && seconds == 0) 
+                {
+                    t.stop();
+                    return;
+                }
+            }
+        });
+        t.start();
+    }
+
+    //formats the timer display to show as "##:##"
+    public String labelDisplay(int min, int sec)
+    {
+        String s;
+        if(min < 10)
+        {
+            if(sec < 10)
+            {
+                l.setText("0" + min + ":0" + sec);
+                s = "0" + min + ":0" + sec;
+            }
+            else
+            {
+                l.setText("0" + min + ":" + sec);
+                s = "0" + min + ":" + sec;
+            }
+        }
+        else if(sec < 10)
+        {
+            l.setText(min + ":0" + sec);
+            s = min + ":0" + sec;
+        }
+        else
+        {
+            l.setText(min + ":" + sec);
+            s = min + ":" + sec;
+        }
+        return s;
     }
 }
