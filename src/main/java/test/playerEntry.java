@@ -106,9 +106,9 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // onnectDB();
             System.out.println((delay / 1000 - 1) + " Seconds to game start");
             timerTest test = new timerTest(min, sec);
+            test.createFrame();
             test.countdownTest();
 
             ActionListener taskPerformer = new ActionListener() {
@@ -145,6 +145,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         insertDB();
         System.out.println((delay / 1000 - 1) + " Seconds to game start");
         timerTest test = new timerTest(min, sec);
+        test.createFrame();
         test.countdownTest();
         // for (int i = 0; i < team1Players.length; i++) {
         //     System.out.println(team1Players[i][0] + "_" + team1Players[i][1]);

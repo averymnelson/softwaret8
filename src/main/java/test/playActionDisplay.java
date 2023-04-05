@@ -2,10 +2,16 @@ package test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class playActionDisplay extends JPanel {
     public String[][] team1Players = new String[16][2];
     public String[][] team2Players = new String[16][2];
+
+    int minutes = 6;
+    int seconds = 0;
+    private JLabel l;
 
     public playActionDisplay() {
     }
@@ -34,6 +40,74 @@ public class playActionDisplay extends JPanel {
             return team2Players;
         else
             return null;
+    }
+
+    public JPanel gameTime(){
+        JPanel countDownPanel = new JPanel();
+        countDownPanel.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
+        countDownPanel.setLayout(new GridLayout(1,1));
+        l = new JLabel("Count down");
+        l.setSize(100, 20);
+        l.setFont(new Font("Arial", Font.BOLD, 16));
+        l.setHorizontalAlignment(JLabel.CENTER);
+        labelDisplay(minutes, seconds);
+        countdownTest();
+        countDownPanel.add(l);
+        return countDownPanel;
+    }
+
+    //Begins the timer count down
+    public void countdownTest() {
+        int delay = 1000;
+        Timer t = new Timer(delay, null);
+        t.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                seconds--;
+                labelDisplay(minutes, seconds);
+                //Change label to red when 10 seconds remaining
+                if(seconds < 11 && minutes == 0){
+                    l.setForeground(Color.RED);
+                }
+                // Decreasing the minute when seconds fall below 0, still want to display 0
+                if (seconds == -1) {
+                    seconds = 59;
+                    minutes--;
+                    labelDisplay(minutes, seconds);
+                }
+                // Stop the timer, stop the play action
+                if (minutes == 0 && seconds == 0) {
+                    t.stop();
+                    return;
+                }
+            }
+        });
+        t.start();
+    }
+
+    //formats the timer display to show as "##:##"
+    public String labelDisplay(int min, int sec)
+    {
+        String s = "00;00";
+        if(min < 10)
+        {
+            if(sec < 10){
+                l.setText("0" + min + ":0" + sec);
+                s = "0" + min + ":0" + sec;}
+            else{
+                l.setText("0" + min + ":" + sec);
+                s = "0" + min + ":" + sec;}
+        }
+        else if(sec < 10)
+        {
+            l.setText(min + ":0" + sec);
+            s = min + ":0" + sec;
+        }
+        else
+        {
+            l.setText(min + ":" + sec);
+            s = min + ":" + sec;
+        }
+        return s;
     }
 
     public void createGUI() {
@@ -84,9 +158,9 @@ public class playActionDisplay extends JPanel {
         subPanel3.add(gameLogs);
 
         // NEW :::: Adding a count down timer to top of frame
-        displayCountdown = new JPanel();
-        displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
-        displayCountdown.setLayout(new GridLayout(1, 1));
+        // displayCountdown = new JPanel();
+        // displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
+        // displayCountdown.setLayout(new GridLayout(1, 1));
 
         // Team 1
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -114,14 +188,15 @@ public class playActionDisplay extends JPanel {
         c.gridy = 1;
         mainPanel.add(subPanel3, c);
         // Countdown display
+        JPanel countDownPanel = gameTime();
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 100;
-        c.ipadx = 100;
+        c.ipady = 50;
+        c.ipadx = 800;
         c.weightx = 0.0;
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 2;
-        mainPanel.add(displayCountdown, c);
+        mainPanel.add(countDownPanel, c);
 
         // Adding JPanel 1 and 2 to main JPanel
         subPanel3.add(scrollPane1);
