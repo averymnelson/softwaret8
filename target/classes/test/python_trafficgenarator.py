@@ -36,13 +36,13 @@ UDPClientSocketTransmit = socket.socket(family=socket.AF_INET, type=socket.SOCK_
 i = 1
 while i < int(counter):
 	if random.randint(1,2) == 1:
-		message = redteam[random.randint(0, redteamsize - 1)] + ":" + greenteam[random.randint(1, greenteamsize - 1)]
+		message = redteam[random.randint(0, redteamsize - 1)] + " hit " + greenteam[random.randint(1, greenteamsize - 1)]
 	else:
-		message = greenteam[random.randint(1, greenteamsize - 1)] + ":" + redteam[random.randint(0, redteamsize - 1)]
+		message = greenteam[random.randint(1, greenteamsize - 1)] + " hit " + redteam[random.randint(0, redteamsize - 1)]
 
 	print(message)
 	i+=1
 	UDPClientSocketTransmit.sendto(str.encode(str(message)), serverAddressPort)
 	time.sleep(random.randint(1,3))
 
-print("program complete")
+print("bye")

@@ -9,6 +9,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 public final class App {
+
+	public static String traffic;
+
     public static void ShowLogo() {
         JFrame frame = new JFrame();
         ImageIcon icon = new ImageIcon("src/main/java/test/logo.jpg");
@@ -33,7 +36,6 @@ public final class App {
         ShowLogo();
         playerEntry entryScreen = new playerEntry();
         entryScreen.createGUI();
-        //entryScreen.viewDATA();
 
 		//****************udpBaseServer code*******************//
 
@@ -50,7 +52,11 @@ public final class App {
 			// Step 3 : revieve the data in byte buffer.
 			ds.receive(DpReceive);
 
-			System.out.println("Client: " + data(receive));
+			traffic = data(receive).toString();
+			System.out.println(traffic);
+			new Timer(30_000, (e) -> {
+				playActionDisplay.addRow();
+			}).start();
 
 			// Exit the server if the client sends "bye"
 			if (data(receive).toString().equals("bye"))

@@ -1,6 +1,7 @@
 package test;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,8 @@ import java.awt.event.ActionEvent;
 public class playActionDisplay extends JPanel {
     public String[][] team1Players = new String[16][2];
     public String[][] team2Players = new String[16][2];
+    public static JPanel subPanel3;
+    public static DefaultTableModel model;
 
     int minutes = 6;
     int seconds = 0;
@@ -111,9 +114,8 @@ public class playActionDisplay extends JPanel {
     }
 
     public void createGUI() {
-        JPanel mainPanel, subPanel1, subPanel2, subPanel3, displayCountdown;
+        JPanel mainPanel, subPanel1, subPanel2, displayCountdown;
         JFrame frame = new JFrame("Play Action Display");
-        JScrollPane scrollPane1 = new JScrollPane();
         String[] columnName = { "Code Name", "Score" };
 
         JTable table1 = new JTable(teamPlayers(1), columnName);
@@ -129,11 +131,6 @@ public class playActionDisplay extends JPanel {
         table2.setBackground(new Color(255, 192, 203));
         table2.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane3 = new JScrollPane(table2);
-
-        // do we want this printing everyone as part of the test or just one to show it works?
-        JTextField gameLogs = new JTextField(team1Players[0][0] + " hit " + team2Players[0][0]);
-        gameLogs.setEditable(false);
-        // gameLogs.setHorizontalAlignment(JTextField.NORTH_WEST);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -155,12 +152,16 @@ public class playActionDisplay extends JPanel {
         subPanel3 = new JPanel();
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
-        subPanel3.add(gameLogs);
+        
+        model = new DefaultTableModel(); 
+        model.addColumn("Action");
+        JTable gameLog = new JTable(model);
+        gameLog.setShowGrid(false);
+        gameLog.setDefaultEditor(Object.class, null);
+        subPanel3.add(gameLog);
 
-        // NEW :::: Adding a count down timer to top of frame
-        // displayCountdown = new JPanel();
-        // displayCountdown.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
-        // displayCountdown.setLayout(new GridLayout(1, 1));
+        JScrollPane scrollPane1 = new JScrollPane(gameLog);
+        subPanel3.add(scrollPane1);
 
         // Team 1
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -199,9 +200,12 @@ public class playActionDisplay extends JPanel {
         mainPanel.add(countDownPanel, c);
 
         // Adding JPanel 1 and 2 to main JPanel
-        subPanel3.add(scrollPane1);
         frame.add(mainPanel);
-        frame.setSize(1000, 636);
+        frame.setSize(1000, 1000);
         frame.setVisible(true);
+    }
+
+    public static void addRow(){
+        model.addRow(new Object[]{App.traffic});
     }
 }
