@@ -1,11 +1,18 @@
 package test;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class playActionDisplay extends JPanel {
@@ -16,6 +23,9 @@ public class playActionDisplay extends JPanel {
 
     int minutes = 6;
     int seconds = 0;
+    AudioInputStream sound;
+    Clip clip;
+
     private JLabel l;
 
     public playActionDisplay() {
@@ -65,6 +75,8 @@ public class playActionDisplay extends JPanel {
     public void countdownTest() {
         int delay = 1000;
         Timer t = new Timer(delay, null);
+        Music();
+        System.out.println("music called");
         t.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 seconds--;
@@ -82,6 +94,12 @@ public class playActionDisplay extends JPanel {
                 // Stop the timer, stop the play action
                 if (minutes == 0 && seconds == 0) {
                     t.stop();
+                    try{
+                    sound.close();
+                    clip.close();
+                    clip.stop();
+                    } catch (Exception e) {
+                    }
                     return;
                 }
             }
@@ -217,4 +235,26 @@ public class playActionDisplay extends JPanel {
     public static void addRow(){
         model.addRow(new Object[]{App.traffic});
     }
+
+    public void Music() {
+        int sample = (int) (Math.random() * (8 - 7 + 1) + 1);
+        File file = new File("Track0"+sample+".mp3");
+        System.out.println(file);
+        AudioInputStream sound;
+        try {
+            sound = AudioSystem.getAudioInputStream(file);
+        } catch (Exception e){
+        }
+        try {
+            clip = AudioSystem.getClip();
+        } catch (Exception e){
+        }
+        try {
+                sound = AudioSystem.getAudioInputStream(file);
+                clip = AudioSystem.getClip();
+                clip.open(sound);
+        } catch (Exception e) {
+        }
+        clip.start();
+       }
 }
