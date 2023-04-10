@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 
 public class playActionDisplay extends JPanel {
@@ -156,6 +158,13 @@ public class playActionDisplay extends JPanel {
         model = new DefaultTableModel(); 
         model.addColumn("Action");
         JTable gameLog = new JTable(model);
+        //keeps scroll bar at the bottom
+        gameLog.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                gameLog.scrollRectToVisible(gameLog.getCellRect(gameLog.getRowCount()-1, 0, true));
+            }
+        });
+
         gameLog.setShowGrid(false);
         gameLog.setDefaultEditor(Object.class, null);
         subPanel3.add(gameLog);
