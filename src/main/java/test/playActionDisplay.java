@@ -1,18 +1,15 @@
 package test;
 
+import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class playActionDisplay extends JPanel {
@@ -23,8 +20,8 @@ public class playActionDisplay extends JPanel {
 
     int minutes = 6;
     int seconds = 0;
-    AudioInputStream sound;
     Clip clip;
+    AudioInputStream audioInputStream;
 
     private JLabel l;
 
@@ -57,10 +54,10 @@ public class playActionDisplay extends JPanel {
             return null;
     }
 
-    public JPanel gameTime(){
+    public JPanel gameTime() {
         JPanel countDownPanel = new JPanel();
         countDownPanel.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
-        countDownPanel.setLayout(new GridLayout(1,1));
+        countDownPanel.setLayout(new GridLayout(1, 1));
         l = new JLabel("Count down");
         l.setSize(100, 20);
         l.setFont(new Font("Arial", Font.BOLD, 16));
@@ -71,18 +68,16 @@ public class playActionDisplay extends JPanel {
         return countDownPanel;
     }
 
-    //Begins the timer count down
+    // Begins the timer count down
     public void countdownTest() {
         int delay = 1000;
         Timer t = new Timer(delay, null);
-        Music();
-        System.out.println("music called");
         t.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 seconds--;
                 labelDisplay(minutes, seconds);
-                //Change label to red when 10 seconds remaining
-                if(seconds < 11 && minutes == 0){
+                // Change label to red when 10 seconds remaining
+                if (seconds < 11 && minutes == 0) {
                     l.setForeground(Color.RED);
                 }
                 // Decreasing the minute when seconds fall below 0, still want to display 0
@@ -94,10 +89,10 @@ public class playActionDisplay extends JPanel {
                 // Stop the timer, stop the play action
                 if (minutes == 0 && seconds == 0) {
                     t.stop();
-                    try{
-                    sound.close();
-                    clip.close();
-                    clip.stop();
+                    try {
+                        audioInputStream.close();
+                        clip.close();
+                        clip.stop();
                     } catch (Exception e) {
                     }
                     return;
@@ -107,26 +102,21 @@ public class playActionDisplay extends JPanel {
         t.start();
     }
 
-    //formats the timer display to show as "##:##"
-    public String labelDisplay(int min, int sec)
-    {
+    // formats the timer display to show as "##:##"
+    public String labelDisplay(int min, int sec) {
         String s = "00;00";
-        if(min < 10)
-        {
-            if(sec < 10){
+        if (min < 10) {
+            if (sec < 10) {
                 l.setText("0" + min + ":0" + sec);
-                s = "0" + min + ":0" + sec;}
-            else{
+                s = "0" + min + ":0" + sec;
+            } else {
                 l.setText("0" + min + ":" + sec);
-                s = "0" + min + ":" + sec;}
-        }
-        else if(sec < 10)
-        {
+                s = "0" + min + ":" + sec;
+            }
+        } else if (sec < 10) {
             l.setText(min + ":0" + sec);
             s = min + ":0" + sec;
-        }
-        else
-        {
+        } else {
             l.setText(min + ":" + sec);
             s = min + ":" + sec;
         }
@@ -134,7 +124,7 @@ public class playActionDisplay extends JPanel {
     }
 
     public void createGUI() {
-        JPanel mainPanel, subPanel1, subPanel2, displayCountdown;
+        JPanel mainPanel, subPanel1, subPanel2;
         JFrame frame = new JFrame("Play Action Display");
         String[] columnName = { "Code Name", "Score" };
 
@@ -172,14 +162,14 @@ public class playActionDisplay extends JPanel {
         subPanel3 = new JPanel();
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
-        
-        model = new DefaultTableModel(); 
+
+        model = new DefaultTableModel();
         model.addColumn("Action");
         JTable gameLog = new JTable(model);
-        //keeps scroll bar at the bottom
+        // keeps scroll bar at the bottom
         gameLog.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                gameLog.scrollRectToVisible(gameLog.getCellRect(gameLog.getRowCount()-1, 0, true));
+                gameLog.scrollRectToVisible(gameLog.getCellRect(gameLog.getRowCount() - 1, 0, true));
             }
         });
 
@@ -230,31 +220,22 @@ public class playActionDisplay extends JPanel {
         frame.add(mainPanel);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
+        Music();
     }
 
-    public static void addRow(){
-        model.addRow(new Object[]{App.traffic});
+    public static void addRow() {
+        model.addRow(new Object[] { App.traffic });
     }
 
-    public void Music() {
-        int sample = (int) (Math.random() * (8 - 7 + 1) + 1);
-        File file = new File("Track0"+sample+".mp3");
+    public void Music(){
+        int sample = (int) (Math.random() * (8) + 1);
+        String file = "Track0" + sample + ".wav";
         System.out.println(file);
-        AudioInputStream sound;
-        try {
-            sound = AudioSystem.getAudioInputStream(file);
-        } catch (Exception e){
-        }
-        try {
-            clip = AudioSystem.getClip();
-        } catch (Exception e){
-        }
-        try {
-                sound = AudioSystem.getAudioInputStream(file);
-                clip = AudioSystem.getClip();
-                clip.open(sound);
-        } catch (Exception e) {
-        }
+        try{
+        audioInputStream = AudioSystem.getAudioInputStream(new File(file).getAbsoluteFile());
+        clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
         clip.start();
-       }
+        }catch (Exception e){}
+    }
 }

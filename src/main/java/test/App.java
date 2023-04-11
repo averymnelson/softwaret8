@@ -68,6 +68,7 @@ public final class App {
 			// Clear the buffer after every message.
 			receive = new byte[65535];
 		}
+		ds.close();
     }
 	
 	// A utility method to convert the byte array
@@ -85,4 +86,5 @@ public final class App {
 		}
 		return ret;
 	}
+	
 }
