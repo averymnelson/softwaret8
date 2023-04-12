@@ -16,6 +16,7 @@ public class playActionDisplay extends JPanel {
 
     int minutes = 6;
     int seconds = 0;
+    public static boolean gameOver = false;
     private JLabel l;
 
     public playActionDisplay() {
@@ -73,15 +74,18 @@ public class playActionDisplay extends JPanel {
                 if(seconds < 11 && minutes == 0){
                     l.setForeground(Color.RED);
                 }
-                // Decreasing the minute when seconds fall below 0, still want to display 0
+                // Decreasing the minute when seconds fall below 0
                 if (seconds == -1) {
                     seconds = 59;
                     minutes--;
                     labelDisplay(minutes, seconds);
                 }
-                // Stop the timer, stop the play action
-                if (minutes == 0 && seconds == 0) {
+                // Stop the timer
+                if (minutes == 0 && seconds == 0) 
+                {
+                    gameOver = true;
                     t.stop();
+                    labelDisplay(minutes, seconds);
                     return;
                 }
             }
@@ -92,15 +96,19 @@ public class playActionDisplay extends JPanel {
     //formats the timer display to show as "##:##"
     public String labelDisplay(int min, int sec)
     {
-        String s = "00;00";
+        String s;
         if(min < 10)
         {
-            if(sec < 10){
+            if(sec < 10)
+            {
                 l.setText("0" + min + ":0" + sec);
-                s = "0" + min + ":0" + sec;}
-            else{
+                s = "0" + min + ":0" + sec;
+            }
+            else
+            {
                 l.setText("0" + min + ":" + sec);
-                s = "0" + min + ":" + sec;}
+                s = "0" + min + ":" + sec;
+            }
         }
         else if(sec < 10)
         {
@@ -111,6 +119,11 @@ public class playActionDisplay extends JPanel {
         {
             l.setText(min + ":" + sec);
             s = min + ":" + sec;
+        }
+        if(gameOver == true)
+        {
+            l.setText("Game Over!");
+            s = "Game Over!";
         }
         return s;
     }
@@ -215,6 +228,9 @@ public class playActionDisplay extends JPanel {
     }
 
     public static void addRow(){
-        model.addRow(new Object[]{App.traffic});
+        if(gameOver == false)
+        {
+            model.addRow(new Object[]{App.traffic});
+        }
     }
 }
