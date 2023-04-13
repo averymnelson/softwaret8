@@ -227,9 +227,9 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                 try (Statement stmt = con.createStatement()) {
                     ResultSet rs = stmt.executeQuery(query);
                     while (rs.next()) {
-                        String coffeeName = rs.getString("CODENAME");
-                        int supplierID = rs.getInt("ID");
-                        System.out.println(supplierID + "_" + coffeeName);
+                        String Name = rs.getString("CODENAME");
+                        int ID = rs.getInt("ID");
+                        System.out.println(ID + "_" + Name);
                     }
                 } catch (SQLException e) {
                     System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
