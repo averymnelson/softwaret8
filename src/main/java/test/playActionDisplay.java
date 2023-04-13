@@ -1,11 +1,15 @@
 package test;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class playActionDisplay extends JPanel {
@@ -18,6 +22,8 @@ public class playActionDisplay extends JPanel {
     int seconds = 0;
     public static boolean gameOver = false;
     private JLabel l;
+    static Clip clip;
+    static AudioInputStream audioInputStream;
 
     public playActionDisplay() {
     }
@@ -85,6 +91,12 @@ public class playActionDisplay extends JPanel {
                 {
                     gameOver = true;
                     t.stop();
+                    try {
+                        audioInputStream.close();
+                        clip.close();
+                        clip.stop();
+                    } catch (Exception e) {
+                    }
                     labelDisplay(minutes, seconds);
                     return;
                 }
@@ -129,7 +141,7 @@ public class playActionDisplay extends JPanel {
     }
 
     public void createGUI() {
-        JPanel mainPanel, subPanel1, subPanel2, displayCountdown;
+        JPanel mainPanel, subPanel1, subPanel2;
         JFrame frame = new JFrame("Play Action Display");
         String[] columnName = { "Code Name", "Score" };
 
@@ -225,6 +237,7 @@ public class playActionDisplay extends JPanel {
         frame.add(mainPanel);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
+        Music();
     }
 
     public static void addRow(){
@@ -233,4 +246,22 @@ public class playActionDisplay extends JPanel {
             model.addRow(new Object[]{App.traffic});
         }
     }
-}
+    public static void Music() {
+		try{
+		int sample = (int) (Math.random() * (8) + 1);
+		File file = new File("src\\main\\java\\test\\Track0" + sample + ".wav");
+		//System.out.println(file);
+		if (file.exists()){
+			System.out.println(file);
+			audioInputStream = AudioSystem.getAudioInputStream(file);
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+	}
+		else{
+			System.out.println("Can't find audio file");
+		}
+	}catch (Exception e){
+
+	}
+}}
