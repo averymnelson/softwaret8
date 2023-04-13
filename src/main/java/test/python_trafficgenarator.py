@@ -45,4 +45,5 @@ while i < int(counter):
 	UDPClientSocketTransmit.sendto(str.encode(str(message)), serverAddressPort)
 	time.sleep(random.randint(1,3))
 
+UDPClientSocketTransmit.sendto(str.encode(str("bye")), serverAddressPort)
 print("bye")

@@ -18,8 +18,8 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
     public static String fName, lName, codeName;
     public static String team1Players[][] = new String[15][2];
     public static String team2Players[][] = new String[15][2];
-     private TableModel model;
-     private TableModel model2;
+    private TableModel model;
+    private TableModel model2;
     String url = "jdbc:postgresql://ec2-3-219-213-121.compute-1.amazonaws.com:5432/defdh3biejj702?sslmode=require&user=sennggnbqaumyv&password=298b65e800749214bde557c4e55d199a827fb55d7a29b3e61eb79f67737e839d";
     JPanel panel = new JPanel();
     JPanel mainPanel, subPanel1, subPanel2;
@@ -125,20 +125,11 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         }
     };
 
-    public void keyPressed(KeyEvent e) {
-//        switch (e.getKeyCode()) {
-//            case KeyEvent.VK_ENTER:
-//                viewTable(team1Players);
-//                viewTable(team2Players);
-//                break;
-//        }
-    }
+    public void keyPressed(KeyEvent e) {}
 
-    public void keyReleased(KeyEvent e) {
-    }
+    public void keyReleased(KeyEvent e) {}
 
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) {}
 
     // This method is called when the JBotton is clicked
     public void actionPerformed(ActionEvent ae) {
@@ -147,15 +138,6 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         timerTest test = new timerTest(min, sec);
         test.createFrame();
         test.countdownTest();
-        // for (int i = 0; i < team1Players.length; i++) {
-        //     System.out.println(team1Players[i][0] + "_" + team1Players[i][1]);
-        // }
-        // System.out.println("\n");
-        // for (int i = 0; i < team2Players.length; i++) {
-        //     System.out.println(team2Players[i][0] + "_" + team2Players[i][1]);
-        // }
-        // System.out.println("\n");
-        // viewDATA();
 
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -176,11 +158,9 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                 System.out.println("Connected to the database! Inserting Players.");
                 for (int i = 0; i < 15; i++) {
                     if (team1Players[i][0] != null && team1Players[i][1] != null) {
-                        // int savingID = Integer.parseInt(team1Players[i][0]);
                         String sql = "INSERT INTO player (id, first_name, last_name, codename) VALUES ("
                                 + team1Players[i][0] + ", 'testfName', 'testlName', '" + team1Players[i][1] + "')";
                         // String sql = "DELETE FROM player";
-                        //System.out.println(sql);
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         pstmt.executeUpdate();
                         pstmt.close();
@@ -214,22 +194,16 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                     while (rs.next()) {
                         String codename = rs.getString("CODENAME");
                         String id = rs.getString("ID");
-                        // String ID2 = String.valueOf(id);
-                        // System.out.println(codename + ", " + ID2);
                         for (int i = 0; i < 15; i++) {
-                            // System.out.println("checking interior");
                             if (team1Players[i][0] != null) {
-                                if (id.equals(team1Players[i][0])) {
+                                if (id.equals(team1Players[i][0]))
                                     team1Players[i][1] = codename;
-                                } 
                             }
                         }
                         for (int i = 0; i < 15; i++) {
-                            // System.out.println("checking interior");
                             if (team2Players[i][0] != null) {
-                                if (id.equals(team2Players[i][0])) {
+                                if (id.equals(team2Players[i][0]))
                                     team2Players[i][1] = codename;
-                                } 
                             }
                         }
                     }
@@ -269,9 +243,6 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
             e.printStackTrace();
         }
     }
-    // public void setValueAt(String[][] team, String value, int row, int col) {
-    // team[row][col] = value;
-    // }
 
      @Override
      public void tableChanged(TableModelEvent e) {
