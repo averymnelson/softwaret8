@@ -6,24 +6,24 @@ bufferSize  = 1024
 serverAddressPort   = ("127.0.0.1", 7501)
 
 
-print('this program will generate some test traffic for 2 players on the red ')
-print('team as well as 2 players on the green team')
+print('this program will generate some test traffic for 2 players on the purple ')
+print('team as well as 2 players on the pink team')
 print('')
 
-redteamsize = int(input('Enter number of red team players ==> '))
-greenteamsize = int(input('Enter number of green team players ==> '))
+purpleteamsize = int(input('Enter number of purple team players ==> '))
+pinkteamsize = int(input('Enter number of pink team players ==> '))
 
-redteam = [i for i in range(1, redteamsize + 1)]
-greenteam = [i for i in range(1, greenteamsize + 1)]
+purpleteam = [i for i in range(1, purpleteamsize + 1)]
+pinkteam = [i for i in range(1, pinkteamsize + 1)]
 
 i = 1
-while i <= redteamsize:
-    redteam[i-1] = input('Enter id of red player ' + str(i) + ' ==> ')
+while i <= purpleteamsize:
+    purpleteam[i-1] = input('Enter id of purple player ' + str(i) + ' ==> ')
     i+=1
 
 i = 1
-while i <= greenteamsize:
-    greenteam[i-1] = input('Enter id of green player ' + str(i) + ' ==> ')
+while i <= pinkteamsize:
+    pinkteam[i-1] = input('Enter id of pink player ' + str(i) + ' ==> ')
     i+=1
 
 print('')
@@ -36,9 +36,9 @@ UDPClientSocketTransmit = socket.socket(family=socket.AF_INET, type=socket.SOCK_
 i = 1
 while i < int(counter):
 	if random.randint(1,2) == 1:
-		message = redteam[random.randint(0, redteamsize - 1)] + " hit " + greenteam[random.randint(0, greenteamsize - 1)]
+		message = purpleteam[random.randint(0, purpleteamsize - 1)] + " hit " + pinkteam[random.randint(0, pinkteamsize - 1)]
 	else:
-		message = greenteam[random.randint(0, greenteamsize - 1)] + " hit " + redteam[random.randint(0, redteamsize - 1)]
+		message = pinkteam[random.randint(0, pinkteamsize - 1)] + " hit " + purpleteam[random.randint(0, purpleteamsize - 1)]
 
 	print(message)
 	i+=1
