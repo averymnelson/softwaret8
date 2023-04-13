@@ -249,7 +249,7 @@ public class playActionDisplay extends JPanel {
     public static void Music() {
 		try{
 		int sample = (int) (Math.random() * (8) + 1);
-		File file = new File("src\\main\\java\\test\\Track0" + sample + ".wav");
+		File file = new File("src\\main\\java\\test\\audio\\Track0" + sample + ".wav");
 		//System.out.println(file);
 		if (file.exists()){
 			System.out.println(file);
