@@ -53,10 +53,6 @@ public final class App {
 			ds.receive(DpReceive);
 
 			traffic = data(receive).toString();
-			System.out.println(traffic);
-			new Timer(30_000, (e) -> {
-				playActionDisplay.addRow();
-			}).start();
 
 			// Exit the server if the client sends "bye"
 			if (data(receive).toString().equals("bye"))
@@ -64,6 +60,24 @@ public final class App {
 				System.out.println("Client sent bye.....EXITING");
 				break;
 			}
+			
+			//grabbing EVERY hit -> need to grab when we start adding rows
+			String[] hits = traffic.split(" hit ");
+			//Looping through string array
+		
+			System.out.println(traffic);
+			new Timer(30_000, (e) -> {
+				playActionDisplay.addRow();
+
+				for (int i = 0; i< hits.length; i = i + 2){
+					int playerID = Integer.parseInt(hits[i]); //contain player ID that got a hit
+					playActionDisplay.addScore(playerID);
+					//System.out.println(playerID);
+					//int [] playersWithHits = new int[PlayerID];
+					//pass player num into function to add score
+					//playActionDisplay.grabPlayerID(playerID);
+				}
+			}).start();
 
 			// Clear the buffer after every message.
 			receive = new byte[65535];

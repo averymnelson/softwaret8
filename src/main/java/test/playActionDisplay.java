@@ -13,10 +13,13 @@ import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class playActionDisplay extends JPanel {
-    public String[][] team1Players = new String[16][2];
-    public String[][] team2Players = new String[16][2];
+    public static String[][] team1Players = new String[16][2];
+    public static String[][] team2Players = new String[16][2];
+    public static JTable table1;
+    public static JTable table2;
     public static JPanel subPanel3;
     public static DefaultTableModel model;
+    public static String score = "0";
 
     int minutes = 6;
     int seconds = 0;
@@ -35,16 +38,16 @@ public class playActionDisplay extends JPanel {
         for (int i = 0; i < 15; i++) {
             if (playerEntry.team1Players[i][0] != null && playerEntry.team1Players[i][1] != null) {
                 team1Players[i][0] = playerEntry.team1Players[i][1];
-                team1Players[i][1] = "0";
+                team1Players[i][1] = score;
                 team2Players[i][0] = playerEntry.team2Players[i][1];
-                team2Players[i][1] = "0";
+                team2Players[i][1] = score;
             }
         }
 
         team1Players[15][0] = "Total Score";
-        team1Players[15][1] = "0";
+        team1Players[15][1] = score;
         team2Players[15][0] = "Total Score";
-        team2Players[15][1] = "0";
+        team2Players[15][1] = score;
 
         if (team == 1)
             return team1Players;
@@ -145,18 +148,12 @@ public class playActionDisplay extends JPanel {
         JFrame frame = new JFrame("Play Action Display");
         String[] columnName = { "Code Name", "Score" };
 
-        JTable table1 = new JTable(teamPlayers(1), columnName);
-        table1.setShowGrid(false);
-        table1.setIntercellSpacing(new Dimension(0, 0));
+        table1 = createTable(columnName, 1);
         table1.setBackground(new Color(216, 191, 216));
-        table1.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane2 = new JScrollPane(table1);
 
-        JTable table2 = new JTable(teamPlayers(2), columnName);
-        table2.setShowGrid(false);
-        table2.setIntercellSpacing(new Dimension(0, 0));
+        table2 = createTable(columnName, 2);
         table2.setBackground(new Color(255, 192, 203));
-        table2.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane3 = new JScrollPane(table2);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -240,28 +237,64 @@ public class playActionDisplay extends JPanel {
         Music();
     }
 
+    public JTable createTable(String[] columnName, int teamNum){
+        JTable table = new JTable(teamPlayers(teamNum), columnName);
+        table.setShowGrid(false);
+        table.setIntercellSpacing(new Dimension(0, 0));
+        table.setDefaultEditor(Object.class, null);
+        return table;
+    }
+
     public static void addRow(){
         if(gameOver == false)
         {
             model.addRow(new Object[]{App.traffic});
         }
     }
+
+    public static void addScore(int playerID){
+        for (int i = 0; i < 15; i++){
+            //check that IDs are not null
+            if (playerEntry.team1Players[i][0] != null && playerEntry.team2Players[i][0] != null) {
+                int player1 = Integer.parseInt(playerEntry.team1Players[i][0]);
+                int player2 = Integer.parseInt(playerEntry.team2Players[i][0]);
+                score = "10";
+                if(player1 == playerID){
+                    team1Players[i][1] = score;
+                    table1.setValueAt(score, i, 1);
+                    System.out.println("Adding 10 to " + playerEntry.team1Players[i][0]);
+                }
+                else if(player2 == playerID){
+                    team2Players[i][1] = score;
+                    table2.setValueAt(score, i, 1);
+                    System.out.println("Adding 10 to " + playerEntry.team2Players[i][0]);
+                }
+                
+            }
+        }
+
+        // team1Players[15][1] = "10";
+        // team2Players[15][1] = "10";
+    }
+
     public static void Music() {
 		try{
 		int sample = (int) (Math.random() * (8) + 1);
 		File file = new File("src\\main\\java\\test\\audio\\Track0" + sample + ".wav");
 		//System.out.println(file);
 		if (file.exists()){
-			System.out.println(file);
+			//System.out.println(file);
 			audioInputStream = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			clip.start();
-	}
+	    }
 		else{
 			System.out.println("Can't find audio file");
 		}
-	}catch (Exception e){
+        }catch (Exception e){
 
-	}
-}}
+        }
+    }
+
+}
