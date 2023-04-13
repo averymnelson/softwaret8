@@ -258,16 +258,16 @@ public class playActionDisplay extends JPanel {
             if (playerEntry.team1Players[i][0] != null && playerEntry.team2Players[i][0] != null) {
                 int player1 = Integer.parseInt(playerEntry.team1Players[i][0]);
                 int player2 = Integer.parseInt(playerEntry.team2Players[i][0]);
-                score = "10";
+
                 if(player1 == playerID){
+                    updateScore(i, 1);
                     team1Players[i][1] = score;
                     table1.setValueAt(score, i, 1);
-                    System.out.println("Adding 10 to " + playerEntry.team1Players[i][0]);
                 }
                 else if(player2 == playerID){
+                    updateScore(i, 2);
                     team2Players[i][1] = score;
                     table2.setValueAt(score, i, 1);
-                    System.out.println("Adding 10 to " + playerEntry.team2Players[i][0]);
                 }
                 
             }
@@ -275,6 +275,16 @@ public class playActionDisplay extends JPanel {
 
         // team1Players[15][1] = "10";
         // team2Players[15][1] = "10";
+    }
+
+    public static void updateScore(int player, int team){
+        int updatedScore = 0;
+        if(team == 1)
+            updatedScore = Integer.parseInt(team1Players[player][1]);
+        if(team == 2)
+            updatedScore = Integer.parseInt(team2Players[player][1]);
+        updatedScore += 10;
+        score = "" + updatedScore;
     }
 
     public static void Music() {
