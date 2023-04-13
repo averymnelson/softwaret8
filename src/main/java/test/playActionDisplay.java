@@ -20,8 +20,8 @@ public class playActionDisplay extends JPanel {
 
     int minutes = 6;
     int seconds = 0;
-    Clip clip;
-    AudioInputStream audioInputStream;
+    static Clip clip;
+    static AudioInputStream audioInputStream;
 
     private JLabel l;
 
@@ -227,15 +227,22 @@ public class playActionDisplay extends JPanel {
         model.addRow(new Object[] { App.traffic });
     }
 
-    public void Music(){
-        int sample = (int) (Math.random() * (8) + 1);
-        String file = "Track0" + sample + ".wav";
-        System.out.println(file);
-        try{
-        audioInputStream = AudioSystem.getAudioInputStream(new File(file).getAbsoluteFile());
-        clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-        }catch (Exception e){}
-    }
-}
+    public static void Music() {
+		try{
+		int sample = (int) (Math.random() * (8) + 1);
+		File file = new File("src\\main\\java\\test\\Track0" + sample + ".wav");
+		System.out.println(file);
+		if (file.exists()){
+			System.out.println(file);
+			audioInputStream = AudioSystem.getAudioInputStream(file);
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+	}
+		else{
+			System.out.println("Can't find file");
+		}
+	}catch (Exception e){
+
+	}
+}}
