@@ -20,6 +20,7 @@ public class playActionDisplay extends JPanel {
     public static JPanel subPanel3;
     public static DefaultTableModel model;
     public static String score = "0";
+    public static String teamScore = "0";
 
     int minutes = 6;
     int seconds = 0;
@@ -263,18 +264,22 @@ public class playActionDisplay extends JPanel {
                     updateScore(i, 1);
                     team1Players[i][1] = score;
                     table1.setValueAt(score, i, 1);
+                    
+                    updateTeamScore(1);
+                    team1Players[15][1] = teamScore;
+                    table1.setValueAt(teamScore, 15, 1);
                 }
                 else if(player2 == playerID){
                     updateScore(i, 2);
                     team2Players[i][1] = score;
                     table2.setValueAt(score, i, 1);
+
+                    updateTeamScore(2);
+                    team2Players[15][1] = teamScore;
+                    table2.setValueAt(teamScore, 15, 1);
                 }
-                
             }
         }
-
-        // team1Players[15][1] = "10";
-        // team2Players[15][1] = "10";
     }
 
     public static void updateScore(int player, int team){
@@ -285,6 +290,17 @@ public class playActionDisplay extends JPanel {
             updatedScore = Integer.parseInt(team2Players[player][1]);
         updatedScore += 10;
         score = "" + updatedScore;
+    }
+
+    public static void updateTeamScore(int team){
+        int updatedteamScore = 0;
+        for(int i = 0; i < 15; i++){
+            if(team == 1 && playerEntry.team1Players[i][0] != null)
+                updatedteamScore = updatedteamScore + Integer.parseInt(team1Players[i][1]);
+            if(team == 2 && playerEntry.team2Players[i][0] != null)
+                updatedteamScore = updatedteamScore + Integer.parseInt(team2Players[i][1]);
+        }
+        teamScore = "" + updatedteamScore;
     }
 
     public static void Music() {
