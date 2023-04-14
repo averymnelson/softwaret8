@@ -98,17 +98,10 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            System.out.println((delay / 1000 - 1) + " Seconds to game start");
-            timerTest test = new timerTest(min, sec);
-            test.createFrame();
-            test.countdownTest();
-
+            timercall();
             ActionListener taskPerformer = new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    playActionDisplay display = new playActionDisplay();
-                    display.createGUI();
-                    frame.setVisible(false);
-                    frame.dispose();
+                    gamedisplay(evt);
                 }
             };
             Timer timer = new Timer(delay, taskPerformer);
@@ -120,26 +113,31 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
     public void keyPressed(KeyEvent e) {}
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
-
     //jbutton game start
     public void actionPerformed(ActionEvent ae) {
+            timercall();
+            ActionListener taskPerformer = new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    gamedisplay(evt);
+                }
+            };
+            Timer timer = new Timer(delay, taskPerformer);
+            timer.setRepeats(false);
+            timer.start();
+        }
+
+    public void timercall(){
         insertDB();
         System.out.println((delay / 1000 - 1) + " Seconds to game start");
         timerTest test = new timerTest(min, sec);
         test.createFrame();
         test.countdownTest();
-
-        ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+    }
+    public void gamedisplay(ActionEvent ae){
                 playActionDisplay display = new playActionDisplay();
                 display.createGUI();
                 frame.setVisible(false);
                 frame.dispose();
-            }
-        };
-        Timer timer = new Timer(delay, taskPerformer);
-        timer.setRepeats(false);
-        timer.start();
     }
 
     public void insertDB() {
