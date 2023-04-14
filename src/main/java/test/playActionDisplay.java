@@ -11,7 +11,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.awt.event.ActionEvent;
-
+//creates play action display, music, handles scoring
 public class playActionDisplay extends JPanel {
     public static String[][] team1Players = new String[16][2];
     public static String[][] team2Players = new String[16][2];
@@ -182,7 +182,6 @@ public class playActionDisplay extends JPanel {
 
         JScrollPane scrollPane1 = new JScrollPane(gameLog);
         subPanel3.add(scrollPane1);
-
         // Team 1
         grid.fill = GridBagConstraints.HORIZONTAL;
         grid.ipady = 310;
@@ -218,7 +217,6 @@ public class playActionDisplay extends JPanel {
         grid.gridx = 0;
         grid.gridy = 2;
         mainPanel.add(countDownPanel, grid);
-
         // Adding JPanel 1 and 2 to main JPanel
         frame.add(mainPanel);
         frame.setSize(1000, 1000);
@@ -235,8 +233,7 @@ public class playActionDisplay extends JPanel {
     }
 
     public static void addRow(){
-        if(gameOver == false)
-        {
+        if(gameOver == false){
             model.addRow(new Object[]{App.traffic});
         }
     }
@@ -272,12 +269,13 @@ public class playActionDisplay extends JPanel {
 
     public static void updateScore(int player, int team){
         int updatedScore = 0;
-        if(team == 1)
+        if(team == 1){
             updatedScore = Integer.parseInt(team1Players[player][1]);
-        if(team == 2)
+        }if(team == 2){
             updatedScore = Integer.parseInt(team2Players[player][1]);
         updatedScore += 10;
         score = "" + updatedScore;
+        }
     }
 
     public static void updateTeamScore(int team){
@@ -295,19 +293,15 @@ public class playActionDisplay extends JPanel {
 		try{
 		int sample = (int) (Math.random() * (8) + 1);
 		File file = new File("src\\main\\java\\test\\audio\\Track0" + sample + ".wav");
-		//System.out.println(file);
 		if (file.exists()){
-			//System.out.println(file);
 			audioInputStream = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			clip.start();
-	    }
-		else{
+	    }else{
 			System.out.println("Can't find audio file");
 		}
         }catch (Exception e){
-
         }
     }
 }

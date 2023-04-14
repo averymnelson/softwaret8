@@ -7,9 +7,8 @@ import javax.swing.JLabel;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-
+//full setup
 public final class App {
-
 	public static String traffic;
 
     public static void ShowLogo() {
