@@ -38,29 +38,33 @@ public final class App {
 
 		DatagramSocket ds = new DatagramSocket(7501);
 		byte[] receive = new byte[65535];
-
 		DatagramPacket DpReceive = null;
+
 		while (true){
 			DpReceive = new DatagramPacket(receive, receive.length);
 			ds.receive(DpReceive);
 			traffic = data(receive).toString();
-			if (data(receive).toString().equals("bye")){
+
+			if (traffic.equals("bye")){
 				System.out.println("Client sent bye.....EXITING");
 				break;
 			}
 			System.out.println(traffic);
 			new Timer(30_000, (e) -> {
-				playActionDisplay.addRow();
-				String[] hits = traffic.split(" hit ");
-				for (int i = 0; i< hits.length; i = i + 2){
-					int playerID = Integer.parseInt(hits[i]); //contain player ID that got a hit
-					playActionDisplay.addScore(playerID);
+				if (!traffic.equals("bye")){
+					playActionDisplay.addRow();
+					String[] hits = traffic.split(" hit ");
+					for (int i = 0; i< hits.length; i = i + 2){
+						int playerID = Integer.parseInt(hits[i]); //contain player ID that got a hit
+						playActionDisplay.addScore(playerID);
+					}
 				}
 			}).start();
 			receive = new byte[65535];
 		}
 		ds.close();
     }
+
 	public static StringBuilder data(byte[] a)
 	{
 		if (a == null){
