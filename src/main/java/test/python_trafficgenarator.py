@@ -40,7 +40,7 @@ while i < int(counter):
 	else:
 		message = pinkteam[random.randint(0, pinkteamsize - 1)] + " hit " + purpleteam[random.randint(0, purpleteamsize - 1)]
 
-	print(message)
+	#print(message)
 	i+=1
 	UDPClientSocketTransmit.sendto(str.encode(str(message)), serverAddressPort)
 	time.sleep(random.randint(1,3))
