@@ -16,6 +16,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
     public static String team2Players[][] = new String[15][2];
     public static String fName, lName, codeName;
     public static int ID;
+    public static boolean IDMatch;
     public JPanel panel = new JPanel();
     public JPanel mainPanel, subPanel1, subPanel2;
     public JFrame frame = new JFrame("Entry Terminal");
@@ -182,19 +183,39 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                         String id = rs.getString("ID");
                         for (int i = 0; i < 15; i++) {
                             if (team1Players[i][0] != null) {
-                                if (id.equals(team1Players[i][0])){
+                                IDMatch=false;
+                                    for (int j=0; j<15; j++){
+                                        if(team1Players[j][0]!="" && team1Players[j][0].equals(id)){
+                                            System.out.println("Please enter an ID that has not already been used. 1 "+j);
+                                            IDMatch=true;
+                                        }else if(team2Players[j][0]!="" && team2Players[j][0].equals(id)){
+                                            System.out.println("Please enter an ID that has not already been used. 2 "+j);
+                                            IDMatch=true;
+                                        }
+                                    }
+                                if (id.equals(team1Players[i][0])&& !IDMatch){
                                     team1Players[i][1] = codename;
+                                    }
                                 }
                             }
-                        }
                         for (int i = 0; i < 15; i++) {
                             if (team2Players[i][0] != null) {
-                                if (id.equals(team2Players[i][0])){
+                                IDMatch=false;
+                                for (int j=0; j<15; j++){
+                                    if(team1Players[j][0]!="" && team1Players[j][0].equals(id)){
+                                        System.out.println("Please enter an ID that has not already been used. 1 "+j);
+                                        IDMatch=true;
+                                    }else if(team2Players[j][0]!="" && team2Players[j][0].equals(id)){
+                                        System.out.println("Please enter an ID that has not already been used. 2 "+j );
+                                        IDMatch=true;
+                                    }
+                                }
+                                if (id.equals(team2Players[i][0]) && !IDMatch){
                                     team2Players[i][1] = codename;
+                                    }
                                 }
                             }
                         }
-                    }
                 } catch (SQLException e) {
                     System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
                 } catch (Exception e) {
