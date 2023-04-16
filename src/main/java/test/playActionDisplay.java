@@ -61,76 +61,83 @@ public class playActionDisplay extends JPanel {
         JPanel countDownPanel = new JPanel();
         countDownPanel.setBorder(BorderFactory.createTitledBorder("Time Remaining:"));
         countDownPanel.setLayout(new GridLayout(1,1));
-        l = new JLabel("Count down");
-        l.setSize(100, 20);
-        l.setFont(new Font("Arial", Font.BOLD, 16));
-        l.setHorizontalAlignment(JLabel.CENTER);
-        labelDisplay(minutes, seconds);
-        countdownTest();
-        countDownPanel.add(l);
+        // l = new JLabel("Count down");
+        // l.setSize(100, 20);
+        // l.setFont(new Font("Arial", Font.BOLD, 16));
+        // l.setHorizontalAlignment(JLabel.CENTER);
+        // labelDisplay(minutes, seconds);
+        // countdownTest();
+        // countDownPanel.add(l);
+        timerTest countDown = new timerTest(6, 0);
+        countDown.countdownTest();
+        // l.add(countDown);
+        // countDownPanel.setGameTime(countDown);
         return countDownPanel;
     }
 
-    public void countdownTest() {
-        //starts countdown
-        int delay = 1000;
-        Timer t = new Timer(delay, null);
-        t.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                seconds--;
-                labelDisplay(minutes, seconds);
-                //changes number color to red
-                if(seconds < 11 && minutes == 0){
-                    l.setForeground(Color.RED);
-                }
-                //carrying over when minute changes
-                if (seconds == -1) {
-                    seconds = 59;
-                    minutes--;
-                    labelDisplay(minutes, seconds);
-                }
-                //stops timer
-                if (minutes == 0 && seconds == 0) {
-                    gameOver = true;
-                    t.stop();
-                    try {
-                        audioInputStream.close();
-                        clip.close();
-                        clip.stop();
-                    } catch (Exception e) {
-                    }
-                    labelDisplay(minutes, seconds);
-                    return;
-                }
-            }
-        });
-        t.start();
-    }
+    // public void setGameTime(timerTest t){
 
-    //formats the timer display
-    public String labelDisplay(int min, int sec)
-    {
-        String s;
-        if(min < 10){
-            if(sec < 10){
-                l.setText("0" + min + ":0" + sec);
-                s = "0" + min + ":0" + sec;
-            }else{
-                l.setText("0" + min + ":" + sec);
-                s = "0" + min + ":" + sec;
-            }
-        }else if(sec < 10){
-            l.setText(min + ":0" + sec);
-            s = min + ":0" + sec;
-        }else{
-            l.setText(min + ":" + sec);
-            s = min + ":" + sec;
-        }if(gameOver == true){
-            l.setText("Game Over!");
-            s = "Game Over!";
-        }
-        return s;
-    }
+    // }
+    // public void countdownTest() {
+    //     //starts countdown
+    //     int delay = 1000;
+    //     Timer t = new Timer(delay, null);
+    //     t.addActionListener(new ActionListener() {
+    //         public void actionPerformed(ActionEvent evt) {
+    //             seconds--;
+    //             labelDisplay(minutes, seconds);
+    //             //changes number color to red
+    //             if(seconds < 11 && minutes == 0){
+    //                 l.setForeground(Color.RED);
+    //             }
+    //             //carrying over when minute changes
+    //             if (seconds == -1) {
+    //                 seconds = 59;
+    //                 minutes--;
+    //                 labelDisplay(minutes, seconds);
+    //             }
+    //             //stops timer
+    //             if (minutes == 0 && seconds == 0) {
+    //                 gameOver = true;
+    //                 t.stop();
+    //                 try {
+    //                     audioInputStream.close();
+    //                     clip.close();
+    //                     clip.stop();
+    //                 } catch (Exception e) {
+    //                 }
+    //                 labelDisplay(minutes, seconds);
+    //                 return;
+    //             }
+    //         }
+    //     });
+    //     t.start();
+    // }
+
+    // //formats the timer display
+    // public String labelDisplay(int min, int sec)
+    // {
+    //     String s;
+    //     if(min < 10){
+    //         if(sec < 10){
+    //             l.setText("0" + min + ":0" + sec);
+    //             s = "0" + min + ":0" + sec;
+    //         }else{
+    //             l.setText("0" + min + ":" + sec);
+    //             s = "0" + min + ":" + sec;
+    //         }
+    //     }else if(sec < 10){
+    //         l.setText(min + ":0" + sec);
+    //         s = min + ":0" + sec;
+    //     }else{
+    //         l.setText(min + ":" + sec);
+    //         s = min + ":" + sec;
+    //     }if(gameOver == true){
+    //         l.setText("Game Over!");
+    //         s = "Game Over!";
+    //     }
+    //     return s;
+    // }
 
     public void createGUI() {
         JPanel mainPanel, subPanel1, subPanel2;
