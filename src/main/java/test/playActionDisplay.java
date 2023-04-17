@@ -239,27 +239,6 @@ public class playActionDisplay extends JPanel {
     }
 
     public static void addScore(int playerID){
-        int t1 = Integer.parseInt(team1Players[15][1]);
-        System.out.println(t1);
-        int t2 = Integer.parseInt(team2Players[15][1]);
-        System.out.println(t2);
-        if (t1>t2){
-            //System.out.println(team1Players[15][0]);
-            if(team1Players[15][0].length()<=11){
-                table1.setValueAt(team1Players[15][0].concat("*"),15,0);
-            }
-            System.out.println(team1Players[15][0]);
-            table2.setValueAt(team2Players[15][0].substring(0, 11),15,0);
-            System.out.println(team2Players[15][0]);
-        }else{
-            //System.out.println(team2Players[15][0]);
-            if(team2Players[15][0].length()<=11){
-                table2.setValueAt(team2Players[15][0].concat("*"),15,0);
-            }
-            System.out.println(team2Players[15][0]);
-            table1.setValueAt(team1Players[15][0].substring(0, 11),15,0);
-            System.out.println(team1Players[15][0]);
-        }
         if(gameOver == false){
             for (int i = 0; i < 15; i++){
                 //check that IDs are not null
@@ -285,6 +264,87 @@ public class playActionDisplay extends JPanel {
                         table2.setValueAt(teamScore, 15, 1);
                     }
                 }
+            }
+        }
+        int t1 = Integer.parseInt(team1Players[15][1]);
+        //System.out.println(t1);
+        int t2 = Integer.parseInt(team2Players[15][1]);
+        //System.out.println(t2);
+        if (t1>t2){
+            //System.out.println(team1Players[15][0]);
+            if(team1Players[15][0].length()<=11){
+                table1.setValueAt(team1Players[15][0].concat("*"),15,0);
+            }
+            //System.out.println(team1Players[15][0]);
+            table2.setValueAt(team2Players[15][0].substring(0, 11),15,0);
+            //System.out.println(team2Players[15][0]);
+        }if (t2>t1){
+            //System.out.println(team2Players[15][0]);
+            if(team2Players[15][0].length()<=11){
+                table2.setValueAt(team2Players[15][0].concat("*"),15,0);
+            }
+            //System.out.println(team2Players[15][0]);
+            table1.setValueAt(team1Players[15][0].substring(0, 11),15,0);
+            //System.out.println(team1Players[15][0]);
+        }
+        highPlayer();
+    }
+
+    private static void highPlayer() {
+        int arr[]=new int [15];
+        for (int i=0; i<15;i++){
+            if (team1Players[i][0]!=null){
+                arr[i]=Integer.parseInt(team1Players[i][1]);
+            }
+        }
+        int max=0;
+        int indexmax=0;
+        for (int i=0; i<15;i++){
+            if(arr[i]>max){
+                max=arr[i];
+                indexmax=i;
+            }
+        }
+
+        int arr2[]=new int [15];
+        for (int i=0; i<15;i++){
+            if (team2Players[i][0]!=null){
+            arr[i]=Integer.parseInt(team2Players[i][1]);
+            }
+        }
+        int max2=0;
+        int indexmax2=0;
+        for (int i=0; i<15;i++){
+            if(arr2[i]>max){
+                max=arr2[i];
+                indexmax=i;
+            }
+        }
+        for (int i=0; i<15; i++){
+            if (team2Players[i][0]!=null){
+            String[] arrOfStr = team2Players[i][0].split("\\*");
+            table2.setValueAt(arrOfStr[0],i,0);
+            }
+        }
+        for (int i=0; i<15; i++){
+            if (team1Players[i][0]!=null){
+            String[] arrOfStr = team1Players[i][0].split("\\*");
+            table1.setValueAt(arrOfStr[0],i,0);
+            }
+        }
+        if (max>max2){
+            //System.out.println(team1Players[15][0]);
+            
+            int len=team1Players[indexmax][0].length();
+            if(team1Players[indexmax][0].length()<=len){
+                table1.setValueAt(team1Players[indexmax][0].concat("*"),indexmax,0);
+            }
+            
+        }else{
+            //System.out.println(team2Players[15][0]);
+            int len=team2Players[indexmax2][0].length();
+            if(team2Players[indexmax2][0].length()<=len){
+                table2.setValueAt(team2Players[indexmax2][0].concat("*"),indexmax2,0);
             }
         }
     }
