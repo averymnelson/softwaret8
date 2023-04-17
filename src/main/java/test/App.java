@@ -50,7 +50,7 @@ public final class App {
 				break;
 			}
 			System.out.println(traffic);
-			new Timer(30_000, (e) -> {
+			if(playActionDisplay.model != null){
 				if (!traffic.equals("bye")){
 					playActionDisplay.addRow();
 					String[] hits = traffic.split(" hit ");
@@ -59,7 +59,7 @@ public final class App {
 						playActionDisplay.addScore(playerID);
 					}
 				}
-			}).start();
+			}
 			receive = new byte[65535];
 		}
 		ds.close();
