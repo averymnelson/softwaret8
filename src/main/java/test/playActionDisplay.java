@@ -239,6 +239,21 @@ public class playActionDisplay extends JPanel {
     }
 
     public static void addScore(int playerID){
+        int t1 = Integer.parseInt(team1Players[15][1]);
+        System.out.println(t1);
+        int t2 = Integer.parseInt(team2Players[15][1]);
+        System.out.println(t2);
+        if (t1>t2){
+            System.out.println(team1Players[15][0]);
+            team1Players[15][0]=team1Players[15][0].concat("*");
+            System.out.println(team1Players[15][0]);
+            team2Players[15][0]=team2Players[15][0].substring(0, team2Players[15][0].length() - 1);
+        }else{
+            System.out.println(team2Players[15][0]);
+            team2Players[15][0]=team2Players[15][0].concat("*");
+            System.out.println(team2Players[15][0]);
+            team1Players[15][0]=team1Players[15][0].substring(0, team1Players[15][0].length() - 1);
+        }
         for (int i = 0; i < 15; i++){
             //check that IDs are not null
             //System.out.println(playerEntry.team1Players[i][0]);
