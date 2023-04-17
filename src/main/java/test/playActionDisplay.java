@@ -138,10 +138,12 @@ public class playActionDisplay extends JPanel {
         String[] columnName = { "Code Name", "Score" };
 
         table1 = createTable(columnName, 1);
+        table1.getTableHeader().setBackground(new Color(196, 171, 196));
         table1.setBackground(new Color(216, 191, 216));
         JScrollPane scrollPane2 = new JScrollPane(table1);
 
         table2 = createTable(columnName, 2);
+        table2.getTableHeader().setBackground(new Color(235, 172, 183));
         table2.setBackground(new Color(255, 192, 203));
         JScrollPane scrollPane3 = new JScrollPane(table2);
 
@@ -165,10 +167,12 @@ public class playActionDisplay extends JPanel {
         subPanel3 = new JPanel();
         subPanel3.setBorder(BorderFactory.createTitledBorder("Current Game Action"));
         subPanel3.setLayout(new GridLayout(1, 1));
-        
+
         model = new DefaultTableModel(); 
         model.addColumn("Action");
         JTable gameLog = new JTable(model);
+        gameLog.setBackground(new Color(174,198, 207));
+        gameLog.getTableHeader().setBackground(new Color(154,178, 187));
         //keeps scroll bar at the bottom
         gameLog.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
@@ -181,6 +185,7 @@ public class playActionDisplay extends JPanel {
         subPanel3.add(gameLog);
 
         JScrollPane scrollPane1 = new JScrollPane(gameLog);
+        scrollPane1.setBackground(new Color(174,198, 207));
         subPanel3.add(scrollPane1);
         // Team 1
         grid.fill = GridBagConstraints.HORIZONTAL;
@@ -219,7 +224,7 @@ public class playActionDisplay extends JPanel {
         mainPanel.add(countDownPanel, grid);
         // Adding JPanel 1 and 2 to main JPanel
         frame.add(mainPanel);
-        frame.setSize(1000, 1000);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
         Music();
     }

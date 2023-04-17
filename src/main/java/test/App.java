@@ -20,7 +20,6 @@ public final class App {
         ImageIcon icon = new ImageIcon("src/main/java/test/logo.jpg");
         JLabel label = new JLabel(icon);
 		frame.add(label);
-        //frame.setSize(1000, 636);
         frame.setFocusable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
