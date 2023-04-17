@@ -242,7 +242,6 @@ public class playActionDisplay extends JPanel {
         if(gameOver == false){
             for (int i = 0; i < 15; i++){
                 //check that IDs are not null
-                //System.out.println(playerEntry.team1Players[i][0]);
                 if (playerEntry.team1Players[i][0] != null && playerEntry.team2Players[i][0] != null) {
                     int player1 = Integer.parseInt(playerEntry.team1Players[i][0]);
                     int player2 = Integer.parseInt(playerEntry.team2Players[i][0]);
@@ -271,13 +270,12 @@ public class playActionDisplay extends JPanel {
 
     public static void updateScore(int player, int team){
         int updatedScore = 0;
-        if(team == 1){
+        if(team == 1)
             updatedScore = Integer.parseInt(team1Players[player][1]);
-        }if(team == 2){
+        else if(team == 2)
             updatedScore = Integer.parseInt(team2Players[player][1]);
         updatedScore += 10;
         score = "" + updatedScore;
-        }
     }
 
     public static void updateTeamScore(int team){
