@@ -2,12 +2,9 @@ package test;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
