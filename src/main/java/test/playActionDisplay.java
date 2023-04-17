@@ -309,7 +309,7 @@ public class playActionDisplay extends JPanel {
         int arr2[]=new int [15];
         for (int i=0; i<15;i++){
             if (team2Players[i][0]!=null){
-            arr[i]=Integer.parseInt(team2Players[i][1]);
+            arr2[i]=Integer.parseInt(team2Players[i][1]);
             }
         }
         int max2=0;
