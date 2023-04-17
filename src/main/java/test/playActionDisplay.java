@@ -184,7 +184,7 @@ public class playActionDisplay extends JPanel {
         subPanel3.add(scrollPane1);
         // Team 1
         grid.fill = GridBagConstraints.HORIZONTAL;
-        grid.ipady = 310;
+        grid.ipady = 255;
         grid.ipadx = 400;
         grid.weightx = 0.0;
         grid.gridx = 0;
@@ -192,7 +192,7 @@ public class playActionDisplay extends JPanel {
         mainPanel.add(subPanel1, grid);
         // Team 2
         grid.fill = GridBagConstraints.HORIZONTAL;
-        grid.ipady = 310;
+        grid.ipady = 255;
         grid.ipadx = 400;
         grid.weightx = 0.0;
         grid.gridx = 1;
@@ -200,7 +200,7 @@ public class playActionDisplay extends JPanel {
         mainPanel.add(subPanel2, grid);
         // Game log
         grid.fill = GridBagConstraints.HORIZONTAL;
-        grid.ipady = 200;
+        grid.ipady = 300;
         grid.ipadx = 800;
         grid.weightx = 0.0;
         grid.gridwidth = 2;
