@@ -6,14 +6,10 @@ Avery Nelson
 Marlise Massey 
 Claire Dildy 
 
-    To run this program in VSCode, run from App.java with VsCode java extensions installed. Type in the 
-    player ID/codenames, then run the traffic genarator from python_trafficgenarator.py during the 30
-    second countdown. Type in the required information into the terminal then click back into the 
-    play action window.
+    To run this program in VSCode, run from App.java with VsCode java extensions installed. Type in the player ID/codenames, then run the traffic genarator from python_trafficgenarator.py during the 30 second countdown. Type the required information into the terminal then click back into the play action window.
 
-App.java : This is the class with our Main function - where we make database connection and display logo
-playerEntry.java : This is where players enter their ID/codename into a table by JTable.
-playActionDisplay.java : This is where play action is displayed.
-timerTest.java : This contains the countdown timer that displays a countdown in a new window before the
-    start of the game.
+App.java : This is the class with our Main function - where we make socket connections to recieve traffic and display the logo
+playerEntry.java : This is where players enter their ID/codename into a table by JTable, and where we make the database connections to insert the players. If there is a valid codename in the databse, typing the ID will auto populate it. 
+playActionDisplay.java : This is where play action is displayed with the winning player and team indicated by *. The most recent game activity is at the bottom of the game log, with scrollability to see every event above.
+timerTest.java : This contains the countdown timer that displays a countdown in a new window before the start of the game.
 python_trafficgenarator.py : This generates the game actions instantly to simulate real game play.
