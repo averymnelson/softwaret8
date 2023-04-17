@@ -316,8 +316,8 @@ public class playActionDisplay extends JPanel {
         int indexmax2=0;
         for (int i=0; i<15;i++){
             if(arr2[i]>max){
-                max=arr2[i];
-                indexmax=i;
+                max2=arr2[i];
+                indexmax2=i;
             }
         }
         for (int i=0; i<15; i++){
