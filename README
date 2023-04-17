@@ -6,7 +6,7 @@ Avery Nelson
 Marlise Massey 
 Claire Dildy 
 
-To run this program in VSCode, run from App.java with VsCode java extensions installed. Type in the 
+    To run this program in VSCode, run from App.java with VsCode java extensions installed. Type in the 
     player ID/codenames, then run the traffic genarator from python_trafficgenarator.py during the 30
     second countdown. Type in the required information into the terminal then click back into the 
     play action window.
@@ -16,5 +16,4 @@ playerEntry.java : This is where players enter their ID/codename into a table by
 playActionDisplay.java : This is where play action is displayed.
 timerTest.java : This contains the countdown timer that displays a countdown in a new window before the
     start of the game.
-python_trafficgenarator.py : This generates the game actions after a delay of about 20 seconds to 
-    simulate real game play.
+python_trafficgenarator.py : This generates the game actions instantly to simulate real game play.
