@@ -315,21 +315,21 @@ public class playActionDisplay extends JPanel {
         int max2=0;
         int indexmax2=0;
         for (int i=0; i<15;i++){
-            if(arr2[i]>max){
+            if(arr2[i]>max2){
                 max2=arr2[i];
                 indexmax2=i;
             }
         }
         for (int i=0; i<15; i++){
             if (team2Players[i][0]!=null){
-            String[] arrOfStr = team2Players[i][0].split("\\*");
-            table2.setValueAt(arrOfStr[0],i,0);
+                String[] arrOfStr = team2Players[i][0].split("\\*");
+                table2.setValueAt(arrOfStr[0],i,0);
             }
         }
         for (int i=0; i<15; i++){
             if (team1Players[i][0]!=null){
-            String[] arrOfStr = team1Players[i][0].split("\\*");
-            table1.setValueAt(arrOfStr[0],i,0);
+                String[] arrOfStr = team1Players[i][0].split("\\*");
+                table1.setValueAt(arrOfStr[0],i,0);
             }
         }
         if (max>max2){
