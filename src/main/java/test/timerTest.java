@@ -2,15 +2,22 @@ package test;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+//import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Font;
+//import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class timerTest {
     int seconds, minutes;
     private JLabel label;
+    Image img = Toolkit.getDefaultToolkit().getImage("src/main/java/test/hourglass.jpg");
+
     public timerTest(int m, int s) {
         label = new JLabel("Game label");
         minutes = m;
@@ -61,11 +68,22 @@ public class timerTest {
         return s;
     }
 
+    // @Override
+    // public void paintComponent(Graphics g){
+    //     super.paintComponent(g);
+    //     g.drawImage(img, 0, 0, null);
+    // }
+
     public void createFrame(){
         JFrame frame = new JFrame();
+        // ImageIcon icon = new ImageIcon("src/main/java/test/hourglass.jpg");
+        // JLabel l = new JLabel(icon);
+        // frame.add(l);
+        // Image img = Toolkit.getDefaultToolkit().getImage("src/main/java/test/hourglass.jpg");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this.label);
         frame.setSize(600, 600);
+        frame.getContentPane().setBackground(Color.DARK_GRAY);
         frame.setVisible(true);
     }
 }
