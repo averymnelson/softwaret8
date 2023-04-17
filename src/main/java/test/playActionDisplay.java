@@ -245,15 +245,20 @@ public class playActionDisplay extends JPanel {
         System.out.println(t2);
         if (t1>t2){
             //System.out.println(team1Players[15][0]);
-            team1Players[15][0]=team1Players[15][0].concat("*");
-            //System.out.println(team1Players[15][0]);
-            team2Players[15][0]=team2Players[15][0].substring(0, 11);
+            if(team1Players[15][0].length()<=11){
+                table1.setValueAt(team1Players[15][0].concat("*"),15,0);
+            }
+            System.out.println(team1Players[15][0]);
+            table2.setValueAt(team2Players[15][0].substring(0, 11),15,0);
+            System.out.println(team2Players[15][0]);
         }else{
             //System.out.println(team2Players[15][0]);
-            team2Players[15][0]=team2Players[15][0].concat("*");
-            //System.out.println(team2Players[15][0]);
-            team1Players[15][0]=team1Players[15][0].substring(0, 11);
-            
+            if(team2Players[15][0].length()<=11){
+                table2.setValueAt(team2Players[15][0].concat("*"),15,0);
+            }
+            System.out.println(team2Players[15][0]);
+            table1.setValueAt(team1Players[15][0].substring(0, 11),15,0);
+            System.out.println(team1Players[15][0]);
         }
         if(gameOver == false){
             for (int i = 0; i < 15; i++){
