@@ -39,7 +39,7 @@ public final class App {
         playerEntry entryScreen = new playerEntry();
         entryScreen.createGUI();
 
-		DatagramSocket ds = new DatagramqwSocket(7501);
+		DatagramSocket ds = new DatagramSocket(7501);
 		byte[] receive = new byte[65535];
 		DatagramPacket DpReceive = null;
 
