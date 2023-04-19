@@ -367,6 +367,9 @@ public class playActionDisplay extends JPanel {
     public static void Music() {
 		try{
 		int sample = (int) (Math.random() * (8) + 1);
+        if (sample==5){
+            sample=6;
+        }
 		File file = new File("src\\main\\java\\test\\audio\\Track0" + sample + ".wav");
 		if (file.exists()){
 			audioInputStream = AudioSystem.getAudioInputStream(file);
