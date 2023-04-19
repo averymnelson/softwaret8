@@ -67,7 +67,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         mainPanel.add(subPanel2);
 
         frame.add(mainPanel);
-        frame.setSize(1000, 636);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainPanel.add(bStart, gridpe);
         addKeyBind(mainPanel, "F5");
         addKeyBind(mainPanel, "Enter");
@@ -75,6 +75,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
 
         table1.setRowHeight(26);
         table1.setGridColor(Color.gray);
+        table1.getTableHeader().setBackground(new Color(196, 171, 196));
         table1.setBackground(new Color(216, 191, 216));
         table1.setRowSelectionAllowed(false);
         model = table1.getModel();
@@ -82,6 +83,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
 
         table2.setRowHeight(26);
         table2.setGridColor(Color.gray);
+        table2.getTableHeader().setBackground(new Color(235, 172, 183));
         table2.setBackground(new Color(255, 192, 203));
         table2.setRowSelectionAllowed(false);
         model2 = table2.getModel();

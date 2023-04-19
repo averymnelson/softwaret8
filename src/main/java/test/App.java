@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.awt.Color;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -15,10 +16,12 @@ public final class App {
         JFrame frame = new JFrame();
         ImageIcon icon = new ImageIcon("src/main/java/test/logo.jpg");
         JLabel label = new JLabel(icon);
-        frame.add(label);
-        frame.setSize(1000, 636);
+		frame.add(label);
         frame.setFocusable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setUndecorated(true);
+		frame.getContentPane().setBackground(Color.BLACK);
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
         new Timer(3_000, (e) -> {
@@ -51,13 +54,11 @@ public final class App {
 			}
 			System.out.println(traffic);
 			if(playActionDisplay.model != null){
-				if (!traffic.equals("bye")){
-					playActionDisplay.addRow();
-					String[] hits = traffic.split(" hit ");
-					for (int i = 0; i< hits.length; i = i + 2){
-						int playerID = Integer.parseInt(hits[i]); //contain player ID that got a hit
-						playActionDisplay.addScore(playerID);
-					}
+				playActionDisplay.addRow();
+				String[] hits = traffic.split(" hit ");
+				for (int i = 0; i< hits.length; i = i + 2){
+					int playerID = Integer.parseInt(hits[i]); //contain player ID that got a hit
+					playActionDisplay.addScore(playerID);
 				}
 			}
 			receive = new byte[65535];
