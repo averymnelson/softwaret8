@@ -185,7 +185,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                         for (int i = 0; i < 15; i++) {
                             if (team1Players[i][0] != null) {
                                 if (id.equals(team1Players[i][0])){
-                                    if (!duplicate(id)){
+                                    if (!duplicate(i, id)){
                                         team1Players[i][1] = codename;
                                     }
                                 }
@@ -194,7 +194,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                         for (int i = 0; i < 15; i++) {
                             if (team2Players[i][0] != null) {
                                 if (id.equals(team2Players[i][0])){
-                                    if (!duplicate(id)){
+                                    if (!duplicate(i, id)){
                                         team2Players[i][1] = codename;
                                     }
                                 }
@@ -237,15 +237,19 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
             e.printStackTrace();
         }
     }
-    public boolean duplicate(String ID){
+    public boolean duplicate(int index, String ID){
         boolean match=false;
         for (int i=0; i<team1Players.length;i++){
-            if(ID.equals(team1Players[i][0])&&team1Players[i][0]!=null){
+            if (i==index){
+                i++;
+            }else if(ID.equals(team1Players[i][0])&&team1Players[i][0]!=null){
                 match=true;
             }
         }
         for (int i=0; i<team2Players.length;i++){
-            if(ID.equals(team2Players[i][0])&&team2Players[i][0]!=null){
+            if (i==index){
+                i++;
+            }else if(ID.equals(team2Players[i][0])&&team2Players[i][0]!=null){
                 match=true;
             }
         }

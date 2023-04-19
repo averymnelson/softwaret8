@@ -19,7 +19,7 @@ public final class App {
 		frame.add(label);
         frame.setFocusable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
 		frame.getContentPane().setBackground(Color.BLACK);
         frame.setVisible(true);
@@ -39,7 +39,7 @@ public final class App {
         playerEntry entryScreen = new playerEntry();
         entryScreen.createGUI();
 
-		DatagramSocket ds = new DatagramSocket(7501);
+		DatagramSocket ds = new DatagramqwSocket(7501);
 		byte[] receive = new byte[65535];
 		DatagramPacket DpReceive = null;
 
