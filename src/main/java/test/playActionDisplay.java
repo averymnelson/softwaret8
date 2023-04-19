@@ -272,25 +272,17 @@ public class playActionDisplay extends JPanel {
             }
         }
         int t1 = Integer.parseInt(team1Players[15][1]);
-        //System.out.println(t1);
         int t2 = Integer.parseInt(team2Players[15][1]);
-        //System.out.println(t2);
         if (t1>t2){
-            //System.out.println(team1Players[15][0]);
             if(team1Players[15][0].length()<=11){
                 table1.setValueAt(team1Players[15][0].concat("*"),15,0);
             }
-            //System.out.println(team1Players[15][0]);
             table2.setValueAt(team2Players[15][0].substring(0, 11),15,0);
-            //System.out.println(team2Players[15][0]);
         }if (t2>t1){
-            //System.out.println(team2Players[15][0]);
             if(team2Players[15][0].length()<=11){
                 table2.setValueAt(team2Players[15][0].concat("*"),15,0);
             }
-            //System.out.println(team2Players[15][0]);
             table1.setValueAt(team1Players[15][0].substring(0, 11),15,0);
-            //System.out.println(team1Players[15][0]);
         }
         highPlayer();
     }
@@ -338,15 +330,12 @@ public class playActionDisplay extends JPanel {
             }
         }
         if (max>max2){
-            //System.out.println(team1Players[15][0]);
-            
             int len=team1Players[indexmax][0].length();
             if(team1Players[indexmax][0].length()<=len){
                 table1.setValueAt(team1Players[indexmax][0].concat("*"),indexmax,0);
             }
             
         }else{
-            //System.out.println(team2Players[15][0]);
             int len=team2Players[indexmax2][0].length();
             if(team2Players[indexmax2][0].length()<=len){
                 table2.setValueAt(team2Players[indexmax2][0].concat("*"),indexmax2,0);
