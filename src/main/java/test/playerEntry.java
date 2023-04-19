@@ -185,14 +185,18 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                         for (int i = 0; i < 15; i++) {
                             if (team1Players[i][0] != null) {
                                 if (id.equals(team1Players[i][0])){
-                                    team1Players[i][1] = codename;
+                                    if (!duplicate(id)){
+                                        team1Players[i][1] = codename;
+                                    }
                                 }
                             }
                         }
                         for (int i = 0; i < 15; i++) {
                             if (team2Players[i][0] != null) {
                                 if (id.equals(team2Players[i][0])){
-                                    team2Players[i][1] = codename;
+                                    if (!duplicate(id)){
+                                        team2Players[i][1] = codename;
+                                    }
                                 }
                             }
                         }
@@ -232,6 +236,20 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public boolean duplicate(String ID){
+        boolean match=false;
+        for (int i=0; i<team1Players.length;i++){
+            if(ID.equals(team1Players[i][0])&&team1Players[i][0]!=null){
+                match=true;
+            }
+        }
+        for (int i=0; i<team2Players.length;i++){
+            if(ID.equals(team2Players[i][0])&&team2Players[i][0]!=null){
+                match=true;
+            }
+        }
+        return match;
     }
 
      @Override
