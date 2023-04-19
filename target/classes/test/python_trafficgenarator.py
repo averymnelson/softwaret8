@@ -6,8 +6,8 @@ bufferSize  = 1024
 serverAddressPort   = ("127.0.0.1", 7501)
 
 
-print('this program will generate some test traffic for 2 players on the purple ')
-print('team as well as 2 players on the pink team')
+# print('this program will generate traffic for players on the purple ')
+# print('team as well as players on the pink team')
 print('')
 
 purpleteamsize = int(input('Enter number of purple team players ==> '))
