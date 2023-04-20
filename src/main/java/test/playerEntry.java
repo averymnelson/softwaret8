@@ -262,7 +262,7 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         if (team == 1) {
             for (int i = 0; i < index; i++) {
                 if (ID.equals(team1Players[i][0]) && team1Players[i][0] != null) {
-                    match = true;
+                    match=true;
                 }
             }
             for (int i = 0; i < 15; i++) {
@@ -270,7 +270,8 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                     match = true;
                 }
             }
-        } else {
+        }
+        if (team ==2) {
             for (int i = 0; i < 15; i++) {
                 if (ID.equals(team1Players[i][0]) && team1Players[i][0] != null) {
                     match = true;
