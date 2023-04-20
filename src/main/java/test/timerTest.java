@@ -68,7 +68,7 @@ public class timerTest {
         return s;
     }
 
-    // @Override
+    // @Override //I think this may need to be a separate class to draw an image
     // public void paintComponent(Graphics g){
     //     super.paintComponent(g);
     //     g.drawImage(img, 0, 0, null);
@@ -83,7 +83,7 @@ public class timerTest {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this.label);
         frame.setSize(600, 600);
-        frame.getContentPane().setBackground(Color.DARK_GRAY);
+        frame.getContentPane().setBackground(new Color(174,198, 207));
         frame.setVisible(true);
     }
 }
