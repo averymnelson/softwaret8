@@ -9,6 +9,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import java.sql.*;
+
 //Class playerEntry : Creates tables and allows user to enter text
 public class playerEntry extends JFrame implements ActionListener, KeyListener, TableModelListener {
     // Instance variables/constants
@@ -25,12 +26,15 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
     int min = 0;
     int sec = 30;
     int delay = (min * 60 + sec + 1) * 1000;
+
     // Constructor
     public playerEntry() {
     }
+
     // Create a table for player entry
     public void createGUI() {
-        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game", TitledBorder.CENTER, TitledBorder.TOP));
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Current Game",
+                TitledBorder.CENTER, TitledBorder.TOP));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mainPanel = new JPanel();
@@ -89,18 +93,24 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         model2 = table2.getModel();
         model2.addTableModelListener(this);
     }
-    //funct to bind f5 to start
+
+    // funct to bind f5 to start
     private void addKeyBind(JComponent contentPane, String key) {
-            InputMap inputMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-            ActionMap actionMap = contentPane.getActionMap();
-            inputMap.put(KeyStroke.getKeyStroke(key), "Start Game");
-            actionMap.put("Start Game", startGame);
+        InputMap inputMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = contentPane.getActionMap();
+        inputMap.put(KeyStroke.getKeyStroke(key), "Start Game");
+        actionMap.put("Start Game", startGame);
     }
-    //f5 game start
+
+    // f5 game start
     Action startGame = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            timercall();
+            if (!missingID()) {
+                timercall();
+            } else {
+                System.out.println("Error found with IDs. Ensure all entries have both ID and codename.");
+            }
             ActionListener taskPerformer = new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     gamedisplay(evt);
@@ -112,34 +122,45 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         }
     };
 
-    public void keyPressed(KeyEvent e) {}
-    public void keyReleased(KeyEvent e) {}
-    public void keyTyped(KeyEvent e) {}
-    //jbutton game start
-    public void actionPerformed(ActionEvent ae) {
-            timercall();
-            ActionListener taskPerformer = new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    gamedisplay(evt);
-                }
-            };
-            Timer timer = new Timer(delay, taskPerformer);
-            timer.setRepeats(false);
-            timer.start();
-        }
+    public void keyPressed(KeyEvent e) {
+    }
 
-    public void timercall(){
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    // jbutton game start
+    public void actionPerformed(ActionEvent ae) {
+        if (!missingID()) {
+            timercall();
+        } else {
+            System.out.println("Error found with IDs. Ensure all entries have both ID and codename.");
+        }
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                gamedisplay(evt);
+            }
+        };
+        Timer timer = new Timer(delay, taskPerformer);
+        timer.setRepeats(false);
+        timer.start();
+    }
+
+    public void timercall() {
         insertDB();
         System.out.println((delay / 1000 - 1) + " Seconds to game start");
         timerTest test = new timerTest(min, sec);
         test.createFrame();
         test.countdownTest();
     }
-    public void gamedisplay(ActionEvent ae){
-                playActionDisplay display = new playActionDisplay();
-                display.createGUI();
-                frame.setVisible(false);
-                frame.dispose();
+
+    public void gamedisplay(ActionEvent ae) {
+        playActionDisplay display = new playActionDisplay();
+        display.createGUI();
+        frame.setVisible(false);
+        frame.dispose();
     }
 
     public void insertDB() {
@@ -183,16 +204,18 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
                         String codename = rs.getString("CODENAME");
                         String id = rs.getString("ID");
                         for (int i = 0; i < 15; i++) {
-                            if (team1Players[i][0] != null) {
-                                if (id.equals(team1Players[i][0])){
+                            if (id.equals(team1Players[i][0])) {
+                                if (!duplicate(1, i, id)) {
                                     team1Players[i][1] = codename;
+                                } else {
+                                    team1Players[i][0] = null;
                                 }
                             }
-                        }
-                        for (int i = 0; i < 15; i++) {
-                            if (team2Players[i][0] != null) {
-                                if (id.equals(team2Players[i][0])){
+                            if (id.equals(team2Players[i][0])) {
+                                if (!duplicate(2, i, id)) {
                                     team2Players[i][1] = codename;
+                                } else {
+                                    team2Players[i][0] = null;
                                 }
                             }
                         }
@@ -234,8 +257,54 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
         }
     }
 
-     @Override
-     public void tableChanged(TableModelEvent e) {
-     viewTable();
-     }
+    public boolean duplicate(int team, int index, String ID) {
+        boolean match = false;
+        if (team == 1) {
+            for (int i = 0; i < index; i++) {
+                if (ID.equals(team1Players[i][0]) && team1Players[i][0] != null) {
+                    match=true;
+                }
+            }
+            for (int i = 0; i < 15; i++) {
+                if (ID.equals(team2Players[i][0]) && team2Players[i][0] != null) {
+                    match = true;
+                }
+            }
+        }
+        if (team ==2) {
+            for (int i = 0; i < 15; i++) {
+                if (ID.equals(team1Players[i][0]) && team1Players[i][0] != null) {
+                    match = true;
+                }
+            }
+            for (int i = 0; i < index; i++) {
+                if (ID.equals(team2Players[i][0]) && team2Players[i][0] != null) {
+                    match = true;
+                }
+            }
+        }
+        return match;
+    }
+
+    public boolean missingID() {
+        boolean typedwrong = false;
+        for (int i = 0; i < team1Players.length; i++) {
+            if ((team1Players[i][0] == null && team1Players[i][1] != "")
+                    || (team1Players[i][0] != null && team1Players[i][1] == "")) {
+                typedwrong = true;
+            }
+        }
+        for (int i = 0; i < team2Players.length; i++) {
+            if ((team2Players[i][0] == null && team2Players[i][1] != "")
+                    || (team2Players[i][0] != null && team2Players[i][1] == "")) {
+                typedwrong = true;
+            }
+        }
+        return typedwrong;
+    }
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        viewTable();
+    }
 }

@@ -19,7 +19,7 @@ public final class App {
 		frame.add(label);
         frame.setFocusable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
 		frame.getContentPane().setBackground(Color.BLACK);
         frame.setVisible(true);
