@@ -289,14 +289,14 @@ public class playerEntry extends JFrame implements ActionListener, KeyListener, 
     public boolean missingID() {
         boolean typedwrong = false;
         for (int i = 0; i < team1Players.length; i++) {
-            if ((team1Players[i][0] == null && team1Players[i][1] != "")
-                    || (team1Players[i][0] != null && team1Players[i][1] == "")) {
+            if ((team1Players[i][0] == "" && team1Players[i][1] != "") || (team1Players[i][0] != "" && team1Players[i][1] == "")) {
+                System.out.println("Issue with "+team1Players[i][0]+" "+team1Players[i][1]);
                 typedwrong = true;
             }
         }
         for (int i = 0; i < team2Players.length; i++) {
-            if ((team2Players[i][0] == null && team2Players[i][1] != "")
-                    || (team2Players[i][0] != null && team2Players[i][1] == "")) {
+            if ((team2Players[i][0] == "" && team2Players[i][1] != "") || (team2Players[i][0] != "" && team2Players[i][1] == "")) {
+                System.out.println("Issue with "+team2Players[i][0]+" "+team2Players[i][1]); 
                 typedwrong = true;
             }
         }
