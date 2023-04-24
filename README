@@ -6,7 +6,7 @@ Avery Nelson
 Marlise Massey 
 Claire Dildy 
 
-    To run this program in VSCode, run from App.java with VsCode java extensions installed. Type in the player ID/codenames, then run the traffic genarator from python_trafficgenarator.py during the 30 second countdown. Type the required information into the terminal then click back into the play action window.
+    To run this program in VSCode, run from App.java with VsCode java extensions installed. Type in the player ID/codenames to the player entry screen. Then run the traffic genarator from python_trafficgenarator.py during the 30 second countdown. You can do this by pressing the triangle play button while in that file. Type the required information into the python terminal, then click back into the play action window.
 
 App.java : This is the class with our Main function - where we make socket connections to recieve traffic and display the logo
 playerEntry.java : This is where players enter their ID/codename into a table by JTable, and where we make the database connections to insert the players. If there is a valid codename in the databse, typing the ID will auto populate it. 
