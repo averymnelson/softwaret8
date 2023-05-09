@@ -239,7 +239,7 @@ public class playActionDisplay extends JPanel {
 
     public static void addRow(){
         if(gameOver == false){
-            model.addRow(new Object[]{App.traffic});
+            model.addRow(new Object[]{App.trafficprt});
         }
     }
 

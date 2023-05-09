@@ -11,6 +11,9 @@ import java.net.DatagramSocket;
 //full setup
 public final class App {
 	public static String traffic;
+	public static String trafficprt;
+	public static String hitW;
+	public static String hitL;
 
     public static void ShowLogo() {
         JFrame frame = new JFrame();
@@ -47,12 +50,12 @@ public final class App {
 			DpReceive = new DatagramPacket(receive, receive.length);
 			ds.receive(DpReceive);
 			traffic = data(receive).toString();
-
 			if (traffic.equals("bye")){
 				System.out.println("Client sent bye.....EXITING");
 				break;
 			}
-			System.out.println(traffic);
+			trafficprt = updatetraffic(traffic);
+			System.out.println(trafficprt);
 			if(playActionDisplay.model != null){
 				playActionDisplay.addRow();
 				String[] hits = traffic.split(" hit ");
@@ -65,6 +68,38 @@ public final class App {
 		}
 		ds.close();
     }
+
+	private static String updatetraffic(String trafficIN) {
+		String updated;
+		String[] play = trafficIN.split(" hit ");
+		System.out.println(play[0]+" + "+play[1]);
+		for (int i=0;i<15; i++){
+			if(playerEntry.team1Players[i][0]!=null){
+				//System.out.println(playerEntry.team1Players[i][0]);
+				if (play[0].equals(playerEntry.team1Players[i][0])){
+					hitW=playerEntry.team1Players[i][1];
+					System.out.println("set winner to "+hitW);
+				}
+				if(play[1].equals(playerEntry.team1Players[i][0])){
+					hitL=playerEntry.team1Players[i][1];
+					System.out.println("set loser to "+hitL);
+				}
+			}
+			if(playerEntry.team2Players[i][0]!=null){
+				if (play[0].equals(playerEntry.team2Players[i][0])){
+					hitW=playerEntry.team2Players[i][1];
+					System.out.println("set winner to "+hitW);
+				}
+				if (play[1].equals(playerEntry.team2Players[i][0])){
+					hitL=playerEntry.team2Players[i][1];
+					System.out.println("set loser to "+hitL);
+				}
+			}
+		}
+		System.out.println(hitW + " & "+hitL);
+		updated=hitW+" hit "+hitL;
+		return updated;
+	}
 
 	public static StringBuilder data(byte[] a)
 	{
