@@ -6,6 +6,8 @@ Avery Nelson
 Marlise Massey 
 Claire Dildy 
     *THIS CODE DOES NOT CURRENTLY RUN DUE TO DISCONNECTED HEROKU DATABASE*
+    *TO VIEW FUNCTIONALITY, SEE "Team 8 Laser Tag.pdf" DEMO VIDEO ON SLIDE 7*
+
     To run this program in VSCode, run from App.java with VsCode java extensions installed. Type in the player ID/codenames to the player entry screen. Then run the traffic genarator from python_trafficgenarator.py during the 30 second countdown. You can do this by pressing the triangle play button while in that file. Type the required information into the python terminal, then click back into the play action window.
 
 App.java : This is the class with our Main function - where we make socket connections to recieve traffic and display the logo
